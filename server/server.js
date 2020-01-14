@@ -23,7 +23,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+//User Route
 app.use('/api/user', userRouter);
+//Admin Route
+app.use('/api/admin', adminRouter);
+//Salesperson Routes//
+app.use('/api/salesperson', salespersonRouter);
+//Manager Routes//
+app.use('/api/manager', managerRouter);
 
 // Serve static files
 app.use(express.static('build'));
