@@ -1,16 +1,16 @@
 
 const express = require('express');
 require('dotenv').config();
-
 const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
-
 const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-
+const adminRouter = require('./routes/admin.router');
+// const salespersonRouter = require('./routes/salesperson.router');
+// const managerRouter = require('./routes/manager.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,10 +27,10 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 //Admin Route
 app.use('/api/admin', adminRouter);
-//Salesperson Routes//
-app.use('/api/salesperson', salespersonRouter);
-//Manager Routes//
-app.use('/api/manager', managerRouter);
+// //Salesperson Routes//
+// app.use('/api/salesperson', salespersonRouter);
+// //Manager Routes//
+// app.use('/api/manager', managerRouter);
 
 // Serve static files
 app.use(express.static('build'));
