@@ -63,13 +63,10 @@ router.get('/allSales', (req, res) => {
     .then((response) => {
         const newResponse = response.rows.map((item, index) => {
             const calc = (item.modifier*item.pricePerUnit*item.unitsSold)
-            // console.log('Old array item: ', item)
-            // console.log(calc)
             const newItem = {
                 ...item,
                 commission: calc
             };
-            // console.log('New array item: ', newItem);
             return newItem;
         })
         res.send(newResponse);
@@ -116,7 +113,7 @@ router.get('/teamSales', (req, res) => {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total products sold and total sales per team
-        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold") AS "productsSold", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerProduct" FROM "employees"
+        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold") AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
         JOIN "teams" ON "employees".team_id = "teams".id
         JOIN "sales" ON "employees".id = "sales".employees_id
         JOIN "sales_products" ON "sales".id = "sales_products".sales_id
@@ -132,16 +129,15 @@ router.get('/teamSales', (req, res) => {
             JOIN "sales" ON "employees".id = "sales".employees_id
             JOIN "sales_products" ON "sales".id = "sales_products".sales_id
             JOIN "products" ON "sales_products".product_id = "products".id
-            JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
             GROUP BY "teams".id, "products"."productName", "products".id
             ORDER BY "teams".id ASC;`;
             pool.query(queryString)
             .then((response3) => {
                 res.send({
-                    teamNameMangaer: response1.rows,
+                    teamNameManager: response1.rows,
                     teamSalesTotal: response2.rows,
                     teamIDIndividualProductsSold: response3.rows,
-                });
+                })
             })   
             .catch((err) => {
                 res.sendStatus(500);
@@ -155,5 +151,18 @@ router.get('/teamSales', (req, res) => {
         res.sendStatus(500);
     })
 });
-
+//Get route for Admin Team Sales Page
+router.get('/empSales', (req, res) => {
+    const userID = req.body.userID;
+    const secLvl = req.body.securityLevel;
+    if (secLvl > 5 ) {
+    const queryString = ``;
+    pool.query(queryString)
+    .then((response) => {
+        res.send(response);
+    })
+    .catch((err) => {
+        res.sendStatus(500);
+    })}
+});
 module.exports = router;
