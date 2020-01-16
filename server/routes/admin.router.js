@@ -34,6 +34,18 @@ router.get('/roster', (req, res) => {
     })
     }
 });
+//Delete Router for delete employee on Admin Roster Page
+router.delete('/:id', (req, res) => {
+    const empID = req.params.id;
+    const queryString = `DELETE FROM "employees" WHERE "id" = ${empID};`;
+    pool.query(queryString)
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        res.sendStatus(500);
+    })
+});
 //Get route for Admin All Sales Page
 router.get('/allSales', (req, res) => {
     const userID = req.body.userID;
@@ -66,7 +78,7 @@ router.get('/allSales', (req, res) => {
         res.sendStatus(500);
     })}
 });
-// Post Route
+// Post Route Admin Add Employee Page
 router.post('/postEmp', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -78,8 +90,12 @@ router.post('/postEmp', (req, res) => {
     const hireDate = req.body.hireDate;
     const baseSalary = req.body.baseSalary;
     const team_id = req.body.team_id;
-    const queryString = `INSERT INTO "employees" ("firstName", "lastName", "userName", "password", "email", "position", "securityLevel", "hireDate", "baseSalary", "team_id")
-    VALUES('${firstName}', '${lastName}', '${userName}', '${password}', '${email}', '${position}', ${securityLevel}, '${hireDate}', ${baseSalary}, ${team_id});`;
+    const queryString = `INSERT INTO "employees" ("firstName", "lastName",
+    "userName", "password", "email", "position", "securityLevel", "hireDate",
+    "baseSalary", "team_id")
+    VALUES('${firstName}', '${lastName}', '${userName}', '${password}', 
+    '${email}', '${position}', ${securityLevel}, '${hireDate}', 
+    ${baseSalary}, ${team_id});`;
     pool.query(queryString)
     .then((response) => {
         res.sendStatus(201);
@@ -89,4 +105,5 @@ router.post('/postEmp', (req, res) => {
         console.log(err)
     })
 });
+
 module.exports = router;
