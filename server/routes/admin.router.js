@@ -106,4 +106,54 @@ router.post('/postEmp', (req, res) => {
     })
 });
 
+// Admin Get Total Team Sales -- Team Sales Page
+router.get('/teamSales', (req, res) => {
+    //Querystring for manger/teamNames
+    const queryString = `SELECT "employees"."lastName", "teams"."teamName" FROM "employees"
+    JOIN "teams" ON "employees".team_id = "teams".id
+    WHERE "employees"."securityLevel" =3
+    ORDER BY "teams".id ASC;`;
+    pool.query(queryString)
+    .then((response1) => {
+        //Querystring for total products sold and total sales per team
+        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold") AS "productsSold", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerProduct" FROM "employees"
+        JOIN "teams" ON "employees".team_id = "teams".id
+        JOIN "sales" ON "employees".id = "sales".employees_id
+        JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+        JOIN "products" ON "sales_products".product_id = "products".id
+        JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+        GROUP BY "teams".id
+        ORDER BY "teams".id ASC;`;
+        pool.query(queryString)
+        .then((response2) => {
+            //Querystring for amount of products sold by individual teams
+            const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+            JOIN "teams" ON "employees".team_id = "teams".id
+            JOIN "sales" ON "employees".id = "sales".employees_id
+            JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+            JOIN "products" ON "sales_products".product_id = "products".id
+            JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+            GROUP BY "teams".id, "products"."productName", "products".id
+            ORDER BY "teams".id ASC;`;
+            pool.query(queryString)
+            .then((response3) => {
+                res.send({
+                    teamNameMangaer: response1.rows,
+                    teamSalesTotal: response2.rows,
+                    teamIDIndividualProductsSold: response3.rows,
+                });
+            })   
+            .catch((err) => {
+                res.sendStatus(500);
+            })
+        })   
+        .catch((err) => {
+            res.sendStatus(500);
+        })
+    })   
+    .catch((err) => {
+        res.sendStatus(500);
+    })
+});
+
 module.exports = router;
