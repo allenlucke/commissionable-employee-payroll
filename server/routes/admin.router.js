@@ -54,7 +54,7 @@ router.get('/allSales', (req, res) => {
     if (secLvl > 5 ) {
     const queryString = `SELECT "employees".id, "employees".team_id,
     "employees"."lastName", "employees"."bonusTier", "sales"."transactionNumber",
-    "sales".id, "sales"."orderDate", "products"."productName", "sales_products"."unitsSold",
+    "sales".id AS "salesID", "sales"."orderDate", "products"."productName", "sales_products"."unitsSold",
     "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id
     JOIN "sales_products" ON "sales".id = "sales_products".sales_id

@@ -12,10 +12,8 @@ module.exports = async function(email, firstName, lastName, userName, password) 
     });
 
     let info = await transporter.sendMail({
-        from: process.env.FROM, // sender addressgit sta
-        to: email,
-        // to: "`${email}`",
-        // to: process.env.TO, // list of receivers
+        from: process.env.FROM, // sender address
+        to: email,  // list of receivers
         subject: 'Your user id and password', // Subject line
         text: userName, password, // plain text body
         html: `
