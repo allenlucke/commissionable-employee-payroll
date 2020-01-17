@@ -52,11 +52,37 @@ router.post('/addSale', (req, res) => {
     const bonusTier = req.body.bonusTier;
     const date = req.body.date;
     const transactionNumber = req.body.transactionNumber;
+    const product_id = req.body.product_id;
+    const unitsSold = req.body.unitsSold;
     const queryString = `INSERT INTO "sales" ("employees_id", "orderDate", "transactionNumber")
-    VALUES (${userID}, '${date}', '${transactionNumber}');`;
+    VALUES (${userID}, '${date}', '${transactionNumber}') RETURNING id;`;
     pool.query(queryString)
     .then((response) => {
-        res.sendStatus(201);
+        console.log(response.rows.map((item, index) => {
+            return item.id;
+        }))
+        res.send(response.rows.map((item, index) => {
+            return newSalesId = item.id;
+        }))
+        console.log(newSalesId)
+        const queryString = `INSERT INTO "sales_products" ("sales_id", "product_id", "unitsSold")
+        VALUES (${newSalesId}, ${product_id}, ${unitsSold});`;
+        pool.query(queryString)
+        .then((response2) => {
+            // res.sendStatus(201)
+            
+            pool.query(queryString)
+            .then((response3) => {
+
+            })
+            .catch((err) => {
+                res.sendStatus(500);
+            })
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log(err)
+        })
     })
     .catch((err) => {
         res.sendStatus(500);
