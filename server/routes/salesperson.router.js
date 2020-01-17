@@ -46,9 +46,22 @@ router.get('/sales', (req, res) => {
         res.sendStatus(500);
     })
 });
-
-// GET route for data for view sales/commissions page. ‘/api/salesperson/sales’
-// Req - {userID: number, securityLevel: number}
-// Res - {transactionNumber: string, salesID: number, orderDate: date, productName: string, quantity: number, costPerUnit: number, pricePerUnit: number}
+// Post Route for Salesperson Add Sales Page
+router.post('/addSale', (req, res) => {
+    const userID = req.body.userID;
+    const bonusTier = req.body.bonusTier;
+    const date = req.body.date;
+    const transactionNumber = req.body.transactionNumber;
+    const queryString = `INSERT INTO "sales" ("employees_id", "orderDate", "transactionNumber")
+    VALUES (${userID}, '${date}', '${transactionNumber}');`;
+    pool.query(queryString)
+    .then((response) => {
+        res.sendStatus(201);
+    })
+    .catch((err) => {
+        res.sendStatus(500);
+        console.log(err)
+    })
+});
 
 module.exports = router;
