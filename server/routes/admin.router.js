@@ -103,7 +103,7 @@ router.post('/postEmp', (req, res) => {
     })
 });
 
-// Admin Get Total Team Sales -- Team Sales Page
+// Get Total Team Sales -- Admin Team Sales Page
 router.get('/teamSales', (req, res) => {
     //Querystring for manger/teamNames
     const queryString = `SELECT "employees"."lastName", "teams"."teamName" FROM "employees"
@@ -151,18 +151,41 @@ router.get('/teamSales', (req, res) => {
         res.sendStatus(500);
     })
 });
-//Get route for Admin Team Sales Page
+//Get route for Sales By Employee - Admin Team Sales Page
 router.get('/empSales', (req, res) => {
     const userID = req.body.userID;
     const secLvl = req.body.securityLevel;
-    if (secLvl > 5 ) {
-    const queryString = ``;
+    //Querystring for total sales by employees   
+    const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+    JOIN "sales" ON "employees".id = "sales".employees_id
+    JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+    JOIN "products" ON "sales_products".product_id = "products".id
+    JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+    GROUP BY "employees".id
+    ORDER BY "employees".id;`;
     pool.query(queryString)
-    .then((response) => {
-        res.send(response);
+    .then((response1) => {
+        //Querystring for total sales by employee by product
+        const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+        JOIN "sales" ON "employees".id = "sales".employees_id
+        JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+        JOIN "products" ON "sales_products".product_id = "products".id
+        GROUP BY "products"."productName", "products".id, "employees".id
+        ORDER BY "employees".id ASC;`;
+        pool.query(queryString)
+        .then((response2) => {
+            res.send({
+                salesByEmployee: response1.rows,
+                salesByProduct: response2.rows,
+            })
+        })    
+        .catch((err) => {
+            res.sendStatus(500);
+        })  
     })
     .catch((err) => {
         res.sendStatus(500);
-    })}
+    })
 });
+
 module.exports = router;
