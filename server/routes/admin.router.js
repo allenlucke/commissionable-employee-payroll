@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
+const mail = require('../modules/mailer')
 // Get route for Admin Home Page
 router.get('/', (req, res) => {
     const userID = req.body.userID;
@@ -93,6 +94,7 @@ router.post('/postEmp', (req, res) => {
     VALUES('${firstName}', '${lastName}', '${userName}', '${password}', 
     '${email}', '${position}', ${securityLevel}, '${hireDate}', 
     ${baseSalary}, ${team_id});`;
+    mail(userName, password)
     pool.query(queryString)
     .then((response) => {
         res.sendStatus(201);
