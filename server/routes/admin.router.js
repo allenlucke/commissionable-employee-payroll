@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
-const mail = require('../modules/mailer')
+const mail = require('../modules/mailer');
 // Get route for Admin Home Page
 router.get('/', (req, res) => {
     const userID = req.body.userID;

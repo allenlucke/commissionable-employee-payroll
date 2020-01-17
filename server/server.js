@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
-// Route includes
+// Routes includes
 const userRouter = require('./routes/user.router');
 const adminRouter = require('./routes/admin.router');
-// const salespersonRouter = require('./routes/salesperson.router');
+const salespersonRouter = require('./routes/salesperson.router');
 // const managerRouter = require('./routes/manager.router');
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,7 +28,7 @@ app.use('/api/user', userRouter);
 //Admin Route
 app.use('/api/admin', adminRouter);
 // //Salesperson Routes//
-// app.use('/api/salesperson', salespersonRouter);
+app.use('/api/salesperson', salespersonRouter);
 // //Manager Routes//
 // app.use('/api/manager', managerRouter);
 
