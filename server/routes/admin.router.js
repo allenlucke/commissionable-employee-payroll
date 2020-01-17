@@ -94,7 +94,7 @@ router.post('/postEmp', (req, res) => {
     VALUES('${firstName}', '${lastName}', '${userName}', '${password}', 
     '${email}', '${position}', ${securityLevel}, '${hireDate}', 
     ${baseSalary}, ${team_id});`;
-    mail(userName, password)
+    mail(email, firstName, lastName, userName, password)
     pool.query(queryString)
     .then((response) => {
         res.sendStatus(201);
