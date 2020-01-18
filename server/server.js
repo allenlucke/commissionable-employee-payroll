@@ -6,10 +6,13 @@ const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
-// Routes includes
+// Routes Imports
 const userRouter = require('./routes/user.router');
 const adminRouter = require('./routes/admin.router');
-const salespersonRouter = require('./routes/salesperson.router');
+//Salesperson Routes
+const salesPersonHomePageRouter = require('./routes/salesperson/homePage.router');
+const salesPersonViewSalesPageRouter = require('./routes/salesperson/viewSalesPage.router');
+const salespersonAddSaleRouter = require('./routes/salesperson/addSalesPage.router')
 // const managerRouter = require('./routes/manager.router');
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,12 +26,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
-//User Route
+//User Routes
 app.use('/api/user', userRouter);
-//Admin Route
+//Admin Routes
 app.use('/api/admin', adminRouter);
 // //Salesperson Routes//
-app.use('/api/salesperson', salespersonRouter);
+app.use('/api/salespersonAddSale', salespersonAddSaleRouter);
+app.use('/api/salesperson', salesPersonHomePageRouter);
+app.use('/api/salespersonSales', salesPersonViewSalesPageRouter);
 // //Manager Routes//
 // app.use('/api/manager', managerRouter);
 
