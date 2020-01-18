@@ -69,11 +69,9 @@ router.post('/', (req, res) => {
                                 console.log(err)
                             })
                         } else {
-                            res.sendStatus(201);
-                            
+                            res.sendStatus(201);  
                         }
                     }
-
                 })
                 .catch((err) => {
                     res.sendStatus(500);
