@@ -22,9 +22,6 @@ router.post('/', (req, res) => {
         response.rows.map((item, index) => {
             return newSalesId = item.id;
         })
-        // res.send(response.rows.map((item, index) => {
-        //     return newSalesId = item.id;
-        // }))
         console.log(newSalesId)
         const queryString = `INSERT INTO "sales_products" ("sales_id", "product_id", "unitsSold")
         VALUES (${newSalesId}, ${product_id}, ${unitsSold});`;
@@ -39,14 +36,53 @@ router.post('/', (req, res) => {
             pool.query(queryString)
             .then((response3) => {
                 console.log(response3.rows)
-                // res.send({
-                //     response2: response2.rows,
-                //     response3: response3.rows,
-                // })
-                res.send(response3.rows)
+                response3.rows.map((item, index) => {
+                    return totalProductsSold = item.totalProductsSold;
+                })
+                response3.rows.map((item, index) => {
+                    return empBonusTier = item.bonusTier;
+                })
+                console.log(empBonusTier)
+                console.log(totalProductsSold)
+                const queryString = `SELECT * FROM "bonusTier"`;
+                pool.query(queryString)
+                .then((response4) => {
+                    console.log(response4.rows)
+                    const salesQualifiers = response4.rows.map((item, index) => {
+                        return qualifiers = item.salesQualifier
+                    })
+                    console.log(salesQualifiers)    
+                    for (let i = 0; i < salesQualifiers.length; i++) {
+                        if (empBonusTier >= salesQualifiers.length) {
+                            res.sendStatus(201);
+                        } else if (totalProductsSold >= salesQualifiers[(i + 1)] && empBonusTier <= (i + 1) ){
+                            console.log(i)
+                            console.log(salesQualifiers[i])
+                            const queryString = `UPDATE "employees" SET "bonusTier" = "bonusTier" + 1
+                            WHERE "employees".id = ${userID};`;
+                            pool.query(queryString)
+                            .then((response) => {
+                                res.sendStatus(201);
+                            })
+                            .catch((err) => {
+                                res.sendStatus(500);
+                                console.log(err)
+                            })
+                        } else {
+                            res.sendStatus(201);
+                            
+                        }
+                    }
+
+                })
+                .catch((err) => {
+                    res.sendStatus(500);
+                    console.log(err)
+                })
             })
             .catch((err) => {
                 res.sendStatus(500);
+                console.log(err)
             })
         })
         .catch((err) => {
