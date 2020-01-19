@@ -9,7 +9,12 @@ const passport = require('./strategies/user.strategy');
 // ROUTES IMPORTS
 const userRouter = require('./routes/user.router');
 //Admin Routes
-const adminRouter = require('./routes/admin.router');
+// const adminRouter = require('./routes/admin.router');
+const adminHomePageRouter = require('./routes/admin.router/adminHomePage.router');
+const adminAllSalesPageRouter = require('./routes/admin.router/adminAllSalesPage.router');
+const adminTeamSalesPageRouter = require('./routes/admin.router/adminTeamSalesPage.router');
+const adminRosterPageRouter = require('./routes/admin.router/adminRosterPage.router');
+const adminAddEmployeePageRouter = require('./routes/admin.router/adminAddEmployeePage.router');
 //Salesperson Routes
 const salesPersonHomePageRouter = require('./routes/salesperson.router/homePage.router');
 const salesPersonViewSalesPageRouter = require('./routes/salesperson.router/viewSalesPage.router');
@@ -34,7 +39,11 @@ app.use(passport.session());
 //User Routes
 app.use('/api/user', userRouter);
 //Admin Routes
-app.use('/api/admin', adminRouter);
+app.use('/api/admin', adminHomePageRouter);
+app.use('/api/admin/allSales', adminAllSalesPageRouter);
+app.use('/api/admin/teamSales', adminTeamSalesPageRouter);
+app.use('/api/admin/roster', adminRosterPageRouter);
+app.use('/api/admin/postEmp', adminAddEmployeePageRouter);
 // //Salesperson Routes//
 app.use('/api/salesperson/AddSale', salespersonAddSaleRouter);
 app.use('/api/salesperson', salesPersonHomePageRouter);
