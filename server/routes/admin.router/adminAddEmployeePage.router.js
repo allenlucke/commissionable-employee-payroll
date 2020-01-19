@@ -12,7 +12,7 @@ const userStrategy = require('./../../strategies/user.strategy');
 router.post('/', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const userName = req.body.userName;
+    const username = req.body.username;
     const password = encryptLib.encryptPassword(req.body.password);
     const email = req.body.email;
     const position = req.body.position;
@@ -21,12 +21,12 @@ router.post('/', (req, res) => {
     const baseSalary = req.body.baseSalary;
     const team_id = req.body.team_id;
     const queryString = `INSERT INTO "employees" ("firstName", "lastName",
-    "userName", "password", "email", "position", "securityLevel", "hireDate",
+    "username", "password", "email", "position", "securityLevel", "hireDate",
     "baseSalary", "team_id")
-    VALUES('${firstName}', '${lastName}', '${userName}', '${password}', 
+    VALUES('${firstName}', '${lastName}', '${username}', '${password}', 
     '${email}', '${position}', ${securityLevel}, '${hireDate}', 
     ${baseSalary}, ${team_id});`;
-    mail(email, firstName, lastName, userName, password)
+    mail(email, firstName, lastName, username, password)
     pool.query(queryString)
     .then((response) => {
         res.sendStatus(201);
