@@ -16,13 +16,13 @@ const adminTeamSalesPageRouter = require('./routes/admin.router/adminTeamSalesPa
 const adminRosterPageRouter = require('./routes/admin.router/adminRosterPage.router');
 const adminAddEmployeePageRouter = require('./routes/admin.router/adminAddEmployeePage.router');
 //Salesperson Routes
-const salesPersonHomePageRouter = require('./routes/salesperson.router/homePage.router');
-const salesPersonViewSalesPageRouter = require('./routes/salesperson.router/viewSalesPage.router');
-const salespersonAddSaleRouter = require('./routes/salesperson.router/addSalesPage.router');
+const salesPersonHomePageRouter = require('./routes/salesperson.router/salespersonHomePage.router');
+const salesPersonViewSalesPageRouter = require('./routes/salesperson.router/salespersonViewSalesPage.router');
+const salespersonAddSaleRouter = require('./routes/salesperson.router/salespersonAddSalesPage.router');
 //Manager Routes
-const managerHomePageRouter = require('./routes/manager.router/homePage.router');
-const managerAllSalesPageRouter = require('./routes/manager.router/allSales.router');
-const managerTeamSalesPageRouter = require('./routes/manager.router/teamSales.router');
+const managerHomePageRouter = require('./routes/manager.router/managerHomePage.router');
+const managerAllSalesPageRouter = require('./routes/manager.router/managerAllSales.router');
+const managerTeamSalesPageRouter = require('./routes/manager.router/managerTeamSales.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
