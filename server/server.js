@@ -8,6 +8,8 @@ const passport = require('./strategies/user.strategy');
 
 // ROUTES IMPORTS
 const userRouter = require('./routes/user.router');
+const logInRouter = require('./routes/login.router/login.router');
+const changePasswordRouter = require('./routes/login.router/changePassword.router');
 //Admin Routes
 // const adminRouter = require('./routes/admin.router');
 const adminHomePageRouter = require('./routes/admin.router/adminHomePage.router');
@@ -38,6 +40,8 @@ app.use(passport.session());
 /* ROUTES */
 //User Routes
 app.use('/api/user', userRouter);
+// app.use('/api/loginInfo/login', logInRouter);
+// app.use('/api/loginInfo/change', changePasswordRouter);
 //Admin Routes
 app.use('/api/admin', adminHomePageRouter);
 app.use('/api/admin/allSales', adminAllSalesPageRouter);
