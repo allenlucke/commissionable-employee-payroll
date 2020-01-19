@@ -7,7 +7,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 // ROUTES IMPORTS
-// const userRouter = require('./routes/user.router');
+//User Routes
 const logInRouter = require('./routes/login.router/login.router');
 const changePasswordRouter = require('./routes/login.router/changePassword.router');
 //Admin Routes
@@ -39,9 +39,8 @@ app.use(passport.session());
 
 /* ROUTES */
 //User Routes
-// app.use('/api/user', userRouter);
 app.use('/api/user', logInRouter);
-// app.use('/api/user/change', changePasswordRouter);
+app.use('/api/user/change', changePasswordRouter);
 //Admin Routes
 app.use('/api/admin', adminHomePageRouter);
 app.use('/api/admin/allSales', adminAllSalesPageRouter);
