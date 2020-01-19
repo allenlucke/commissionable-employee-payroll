@@ -4,15 +4,39 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
 
-//Get route for Total Team Sales Manager Team Page
+//Get route for Total Team Sales - Manager Team Page
 router.get('/', (req, res) => {
     const userID = req.body.userID;
     const teamsID = req.body.teamsID;
     const secLvl = req.body.securityLevel;
-    const queryString = ``;
+    //Querystring for total products sold and total sales by team
+    const queryString = `SELECT SUM("sales_products"."unitsSold") AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
+    JOIN "teams" ON "employees".team_id = "teams".id
+    JOIN "sales" ON "employees".id = "sales".employees_id
+    JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+    JOIN "products" ON "sales_products".product_id = "products".id
+    JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+    WHERE "teams".id = ${teamsID}`;
     pool.query(queryString)
-    .then((response) => {
-        res.send(response.rows);
+    .then((response1) => {
+        //Querystring for amount of individual products sold by team
+        const queryString = `SELECT "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+        JOIN "teams" ON "employees".team_id = "teams".id
+        JOIN "sales" ON "employees".id = "sales".employees_id
+        JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+        JOIN "products" ON "sales_products".product_id = "products".id
+        WHERE "teams".id = ${teamsID}
+        GROUP BY "products"."productName", "products".id;`;
+        pool.query(queryString)
+        .then((response2) => {
+            res.send({
+                teamSalesTotal: response1.rows,
+                teamIndividualProductsSold: response2.rows,
+            })
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+        })
     })
     .catch((err) => {
         res.sendStatus(500);
