@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const username = req.body.username;
+    const assignedPassword = req.body.password;
     const password = encryptLib.encryptPassword(req.body.password);
     const email = req.body.email;
     const position = req.body.position;
@@ -26,7 +27,7 @@ router.post('/', (req, res) => {
     VALUES('${firstName}', '${lastName}', '${username}', '${password}', 
     '${email}', '${position}', ${securityLevel}, '${hireDate}', 
     ${baseSalary}, ${team_id});`;
-    mail(email, firstName, lastName, username, password)
+    mail(email, firstName, lastName, username, assignedPassword)
     pool.query(queryString)
     .then((response) => {
         res.sendStatus(201);
