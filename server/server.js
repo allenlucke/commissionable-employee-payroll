@@ -17,6 +17,7 @@ const salespersonAddSaleRouter = require('./routes/salesperson.router/addSalesPa
 //Manager Routes
 const managerHomePageRouter = require('./routes/manager.router/homePage.router');
 const managerAllSalesPageRouter = require('./routes/manager.router/allSales.router');
+const managerTeamSalesPageRouter = require('./routes/manager.router/teamSales.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -41,6 +42,7 @@ app.use('/api/salesperson/Sales', salesPersonViewSalesPageRouter);
 // //Manager Routes//
 app.use('/api/manager', managerHomePageRouter);
 app.use('/api/manager/AllSales', managerAllSalesPageRouter);
+app.use('/api/manager/teamSales', managerTeamSalesPageRouter);
 
 // Serve static files
 app.use(express.static('build'));
