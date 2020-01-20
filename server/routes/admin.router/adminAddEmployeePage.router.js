@@ -9,7 +9,8 @@ const encryptLib = require('./../../modules/encryption');
 const userStrategy = require('./../../strategies/user.strategy');
 
 // Post Route Admin Add Employee Page
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const userSecLvl = req.body.userSecurityLevel;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const username = req.body.username;
@@ -27,6 +28,7 @@ router.post('/', (req, res) => {
     VALUES('${firstName}', '${lastName}', '${username}', '${password}', 
     '${email}', '${position}', ${securityLevel}, '${hireDate}', 
     ${baseSalary}, ${team_id});`;
+    if(userSecLvl >= 10) {
     mail(email, firstName, lastName, username, assignedPassword)
     pool.query(queryString)
     .then((response) => {
@@ -35,7 +37,7 @@ router.post('/', (req, res) => {
     .catch((err) => {
         res.sendStatus(500);
         console.log(err)
-    })
+    })}
 });
 
 module.exports = router;

@@ -3,14 +3,18 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
+const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 // Get Total Team Sales -- Admin Team Sales Page
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
+    const userID = req.body.userID;
+    const userSecLvl = req.body.userSecurityLevel;
     //Querystring for manger/teamNames
     const queryString = `SELECT "employees"."lastName", "teams"."teamName" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
     WHERE "employees"."securityLevel" =3
     ORDER BY "teams".id ASC;`;
+    if (userSecLvl >= 10 ) {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total products sold and total sales per team
@@ -50,13 +54,13 @@ router.get('/', (req, res) => {
     })   
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 //Get route for Sales By Employee - Admin Team Sales Page
-router.get('/empSales', (req, res) => {
+router.get('/empSales', rejectUnauthenticated, (req, res) => {
     const userID = req.body.userID;
-    const secLvl = req.body.securityLevel;
+    const userSecLvl = req.body.userSecurityLevel;
     //Querystring for total sales by employees   
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id
@@ -65,6 +69,7 @@ router.get('/empSales', (req, res) => {
     JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
     GROUP BY "employees".id
     ORDER BY "employees".id;`;
+    if (userSecLvl >= 10 ) {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total sales by employee by product
@@ -87,7 +92,7 @@ router.get('/empSales', (req, res) => {
     })
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 module.exports = router;
