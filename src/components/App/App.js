@@ -5,20 +5,17 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
 
 import './App.css';
 
@@ -71,13 +68,18 @@ class App extends Component {
               authRedirect="/admin"
               component={LoginPage}
             />
-            <ProtectedRoute
+            {/* <ProtectedRoute
               exact
               path="/registration"
               authRedirect="/admin"
-              component={RegisterPage}
+              component={RegisterPage} */}
             />
-
+            <ProtectedRoute
+              exact
+              path="/change"
+              // authRedirect="/admin"
+              component={ChangePasswordPage}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
