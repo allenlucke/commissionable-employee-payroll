@@ -3,12 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
+const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Total Team Sales - Manager Team Page
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const userID = req.body.userID;
     const teamsID = req.body.teamsID;
-    const secLvl = req.body.securityLevel;
+    const userSecLvl = req.body.userSecurityLevel;
     //Querystring for total products sold and total sales by team
     const queryString = `SELECT SUM("sales_products"."unitsSold") AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
@@ -17,6 +18,7 @@ router.get('/', (req, res) => {
     JOIN "products" ON "sales_products".product_id = "products".id
     JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
     WHERE "teams".id = ${teamsID}`;
+    if (userSecLvl >= 5 ) {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for amount of individual products sold by team
@@ -40,14 +42,14 @@ router.get('/', (req, res) => {
     })
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 //Get route for Sales By Employee - Manager Team Sales Page
-router.get('/empSales', (req, res) => {
+router.get('/empSales', rejectUnauthenticated, (req, res) => {
     const userID = req.body.userID;
     const teamsID = req.body.teamsID;
-    const secLvl = req.body.securityLevel;
+    const userSecLvl = req.body.userSecurityLevel;
     //Querystring for total sales by employees   
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
 	JOIN "teams" ON "employees".team_id = "teams".id
@@ -57,6 +59,7 @@ router.get('/empSales', (req, res) => {
     JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
     WHERE "teams".id = ${teamsID}
     GROUP BY "employees".id`;
+    if (userSecLvl >= 5 ) {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total sales by employee by product
@@ -81,7 +84,7 @@ router.get('/empSales', (req, res) => {
     })
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 module.exports = router;

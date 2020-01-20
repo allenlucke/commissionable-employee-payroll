@@ -3,12 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
+const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Manager All Sales Page
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const userID = req.body.userID;
     const teamsID = req.body.teamsID;
-    const secLvl = req.body.securityLevel;
+    const userSecLvl = req.body.userSecurityLevel;
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", 
     "sales"."transactionNumber", "sales".id AS "salesID", "sales"."orderDate", 
     "products"."productName", "sales_products"."unitsSold",
@@ -24,13 +25,14 @@ router.get('/', (req, res) => {
     GROUP BY "employees".id, "sales"."transactionNumber", "sales".id, "products"."productName", 
     "sales_products"."unitsSold", "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier
     ORDER BY "sales".id;`;
+    if (userSecLvl >= 5 ) {
     pool.query(queryString)
     .then((response) => {
         res.send(response.rows);
     })
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 module.exports = router;
