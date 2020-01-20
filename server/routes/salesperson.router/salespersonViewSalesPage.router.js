@@ -3,11 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
+const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Salesperson View Sales/Commissions Page
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const userID = req.body.userID;
-    const secLvl = req.body.securityLevel;
+    const userSecLvl = req.body.userSecurityLevel;
     const queryString = `SELECT "employees".id, "employees"."bonusTier", 
     "sales"."transactionNumber", "sales".id AS "salesID", "sales"."orderDate", 
     "products"."productName", "sales_products"."unitsSold",
@@ -20,15 +21,15 @@ router.get('/', (req, res) => {
     JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
     WHERE "employees".id = ${userID}
     GROUP BY "employees".id, "sales"."transactionNumber", "sales".id, "products"."productName", 
-    "sales_products"."unitsSold", "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier;
-    `;
+    "sales_products"."unitsSold", "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier;`;
+    if (userSecLvl >= 1) {
     pool.query(queryString)
     .then((response) => {
         res.send(response.rows);
     })
     .catch((err) => {
         res.sendStatus(500);
-    })
+    })}
 });
 
 module.exports = router;

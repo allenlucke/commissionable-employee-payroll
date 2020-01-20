@@ -3,9 +3,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
+const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 // Post Route for Salesperson Add Sales Page
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const userSecLvl = req.body.userSecurityLevel;
     const userID = req.body.userID;
     const bonusTier = req.body.bonusTier;
     const date = req.body.date;
@@ -14,6 +16,7 @@ router.post('/', (req, res) => {
     const unitsSold = req.body.unitsSold;
     const queryString = `INSERT INTO "sales" ("employees_id", "orderDate", "transactionNumber")
     VALUES (${userID}, '${date}', '${transactionNumber}') RETURNING id;`;
+    if (userSecLvl >= 1) {
     pool.query(queryString)
     .then((response) => {
         console.log(response.rows.map((item, index) => {
@@ -69,7 +72,7 @@ router.post('/', (req, res) => {
                                 console.log(err)
                             })
                         } else {
-                            res.sendStatus(201);  
+                            res.sendStatus(201);
                         }
                     }
                 })
@@ -91,7 +94,7 @@ router.post('/', (req, res) => {
     .catch((err) => {
         res.sendStatus(500);
         console.log(err)
-    })
+    })}
 });
 
 module.exports = router;
