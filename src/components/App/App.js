@@ -14,8 +14,9 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
-// import RegisterPage from '../RegisterPage/RegisterPage';
 import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
+import AdminHomePage from '../AdminHomePage/AdminHomePage';
+import AdminAllSalesPage from '../AdminAllSalesPage/AdminAllSalesPage';
 
 import './App.css';
 
@@ -49,6 +50,18 @@ class App extends Component {
               path="/change"
               // authRedirect="/admin"
               component={ChangePasswordPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminHome"
+              // authRedirect="/admin"
+              component={AdminHomePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminAllSales"
+              // authRedirect="/admin"
+              component={AdminAllSalesPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.

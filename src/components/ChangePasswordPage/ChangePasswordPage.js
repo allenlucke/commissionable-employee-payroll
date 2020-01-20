@@ -86,7 +86,7 @@ class ChangePasswordPage extends Component {
             />
           </div>
         </form>
-        <center>
+        {/* <center>
           <button
             type="button"
             className="link-button"
@@ -94,7 +94,7 @@ class ChangePasswordPage extends Component {
           >
             Login
           </button>
-        </center>
+        </center> */}
       </div>
     );
   }
