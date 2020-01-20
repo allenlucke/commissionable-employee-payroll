@@ -8,7 +8,7 @@ function* changePassword(action) {
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
     // passes the username and password from the payload to the server
-    yield axios.post('/api/user/change', action.payload);
+    yield axios.put('/api/user/change', action.payload);
 
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload });

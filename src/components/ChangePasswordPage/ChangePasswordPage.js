@@ -82,7 +82,7 @@ class ChangePasswordPage extends Component {
               className="register"
               type="submit"
               name="submit"
-              value="Register"
+              value="Submit"
             />
           </div>
         </form>
