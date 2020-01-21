@@ -17,7 +17,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import AdminAllSalesPage from '../AdminAllSalesPage/AdminAllSalesPage';
-import AdminTeamSalesPage from '../AdminTeamSalesPage/AdminTeamlSalesPage';
+import AdminTeamSalesPage from '../AdminTeamSalesPage/AdminTeamSalesPage';
 
 import './App.css';
 

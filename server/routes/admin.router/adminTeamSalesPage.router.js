@@ -8,17 +8,20 @@ const { rejectUnauthenticated } = require('./../../modules/authentication-middle
 // Get Total Team Sales -- Admin Team Sales Page
 router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
     const userID = req.params.id;
-    const userSecLvl = req.params.userSecurityLevel;
+    const userSecLvl = req.params.userSecLvl;
     //Querystring for manger/teamNames
-    const queryString = `SELECT "employees"."lastName", "teams"."teamName" FROM "employees"
+    const queryString = `SELECT "employees"."lastName","employees".team_id, "teams"."teamName" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
-    WHERE "employees"."securityLevel" =3
+    WHERE "employees"."securityLevel" =5
     ORDER BY "teams".id ASC;`;
     if (userSecLvl >= 10 ) {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total products sold and total sales per team
-        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold") AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
+        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold")
+        AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit")
+        AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold")
+        AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
         JOIN "teams" ON "employees".team_id = "teams".id
         JOIN "sales" ON "employees".id = "sales".employees_id
         JOIN "sales_products" ON "sales".id = "sales_products".sales_id
