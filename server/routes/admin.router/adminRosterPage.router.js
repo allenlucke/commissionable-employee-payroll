@@ -7,6 +7,7 @@ const { rejectUnauthenticated } = require('./../../modules/authentication-middle
 
 //Get Route for Admin Roster Page
 router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body)
     const userID = req.body.userID;
     const userSecLvl = req.body.userSecurityLevel;
     

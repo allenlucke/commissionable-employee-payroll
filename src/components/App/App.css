@@ -47,3 +47,11 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+
+table, th, td {
+    border: 1px solid black;
+  }
+table {
+    width: 100%;
+    background-color: lightblue;
+}
