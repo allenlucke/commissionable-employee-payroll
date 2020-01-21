@@ -6,9 +6,9 @@ const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 // Get Total Team Sales -- Admin Team Sales Page
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const userSecLvl = req.body.userSecurityLevel;
+router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.id;
+    const userSecLvl = req.params.userSecurityLevel;
     //Querystring for manger/teamNames
     const queryString = `SELECT "employees"."lastName", "teams"."teamName" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
@@ -58,9 +58,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 //Get route for Sales By Employee - Admin Team Sales Page
-router.get('/empSales', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const userSecLvl = req.body.userSecurityLevel;
+router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.id;
+    const userSecLvl = req.params.userSecLvl;
     //Querystring for total sales by employees   
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id

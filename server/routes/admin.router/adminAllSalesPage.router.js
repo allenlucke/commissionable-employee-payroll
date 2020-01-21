@@ -7,10 +7,8 @@ const { rejectUnauthenticated } = require('./../../modules/authentication-middle
 
 //Get route for Admin All Sales Page
 router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
-    console.log(req.params.userSecLvl)
     const userID = req.params.id;
     const userSecLvl = req.params.userSecLvl;
-    console.log(userSecLvl)
     const queryString = `SELECT "employees".id AS empID, "employees".team_id,
     "employees"."lastName", "employees"."bonusTier", "sales"."transactionNumber",
     "sales".id AS "salesID", "sales"."orderDate", "products"."productName", "sales_products"."unitsSold",

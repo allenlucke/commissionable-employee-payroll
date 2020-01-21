@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // console.log(this.props.store.user)
 class AdminAllSalesPage extends Component {
     state = {
-        heading: 'Admin All Sales Page',
+        heading: 'Admin Team Sales Page',
     };
     
     componentDidMount() {

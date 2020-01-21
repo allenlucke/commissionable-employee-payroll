@@ -9,8 +9,6 @@ function* getAdminAllSales(action) {
         const response = yield axios({
             method: 'GET',
             url: '/api/admin/allSales/' + secLvl + '/' + id, 
-            // url: '/api/admin/allSales/'+ action.payload,
-            // data: action.payload
         })
         yield put({
             type: 'SET_ADMIN_ALL_SALES',
