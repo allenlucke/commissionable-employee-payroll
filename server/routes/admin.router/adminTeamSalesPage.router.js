@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
+// let newItem;
 
 // Get Total Team Sales -- Admin Team Sales Page
 router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
@@ -18,7 +19,7 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total products sold and total sales per team
-        const queryString = `SELECT "teams"."teamName", SUM("sales_products"."unitsSold")
+        const queryString = `SELECT SUM("sales_products"."unitsSold")
         AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit")
         AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold")
         AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
@@ -32,7 +33,8 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
         pool.query(queryString)
         .then((response2) => {
             //Querystring for amount of products sold by individual teams
-            const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+            const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id
+            AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
             JOIN "teams" ON "employees".team_id = "teams".id
             JOIN "sales" ON "employees".id = "sales".employees_id
             JOIN "sales_products" ON "sales".id = "sales_products".sales_id
@@ -41,11 +43,24 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
             ORDER BY "teams".id ASC;`;
             pool.query(queryString)
             .then((response3) => {
-                res.send({
-                    teamNameManager: response1.rows,
-                    teamSalesTotal: response2.rows,
-                    teamIDIndividualProductsSold: response3.rows,
-                })
+                
+                res.send([
+                    ...response1.rows,
+                    ...response2.rows,
+                    ...response3.rows,
+                ])
+                // let newResponse1 = response1.rows.map((item, index) => {
+                //     let newItem = {
+                //         ...item
+                //     };
+                //     return newItem;
+                //     let newResponse2 = response2
+                // })
+                // res.send({
+                //     teamNameManager: response1.rows,
+                //     teamSalesTotal: response2.rows,
+                //     teamIDIndividualProductsSold: response3.rows,
+                // })
             })   
             .catch((err) => {
                 res.sendStatus(500);
@@ -65,7 +80,9 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
     const userID = req.params.id;
     const userSecLvl = req.params.userSecLvl;
     //Querystring for total sales by employees   
-    const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+    const queryString = `SELECT "employees".id, "employees"."lastName", 
+    "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") 
+    AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id
     JOIN "sales_products" ON "sales".id = "sales_products".sales_id
     JOIN "products" ON "sales_products".product_id = "products".id
@@ -76,7 +93,8 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
     pool.query(queryString)
     .then((response1) => {
         //Querystring for total sales by employee by product
-        const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+        const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", 
+        "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
         JOIN "sales" ON "employees".id = "sales".employees_id
         JOIN "sales_products" ON "sales".id = "sales_products".sales_id
         JOIN "products" ON "sales_products".product_id = "products".id

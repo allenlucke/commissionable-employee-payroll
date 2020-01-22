@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import changePasswordSaga from './changePassword.saga';
 import getAdminAllSalesSaga from './getAdminAllSales.saga';
 import getAdminTotalTeamSalesSaga from './getAdminTotalTeamSales.saga';
+import getAdminRosterSaga from './getAdminRoster.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     userSaga(),
     getAdminAllSalesSaga(),
     getAdminTotalTeamSalesSaga(),
+    getAdminRosterSaga(),
   ]);
 }

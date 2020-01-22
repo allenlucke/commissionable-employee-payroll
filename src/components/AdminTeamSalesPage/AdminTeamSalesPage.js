@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+// const mapStateToProps = reduxState => ({
+//     reduxState,
+// })
 
-// console.log(this.props.store.user)
 class AdminAllSalesPage extends Component {
     state = {
         heading: 'Admin Team Sales Page',
@@ -14,27 +16,58 @@ class AdminAllSalesPage extends Component {
             this.props.dispatch({
             type: 'GET_ADMIN_TOTAL_TEAM_SALES',
             payload: this.props.store.user
+            
         })
     }
 
     render() {
-        JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamNameManager)
-        // const teamSalesList = this.props.store.getAdminTotalTeamSalesReducer.map((item, index) => {
+        // let mgrArray = this.props.store.getAdminTotalTeamSalesReducer.teamNameManager;
+        // let thirdArray = this.props.store.getAdminTotalTeamSalesReducer.teamSalesTotal;
+        // console.log(JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamNameManager))
+        // JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamNameManager)
+        // console.log(mgrArray)
+        // let mgrList = mgrArray.map((item, index) => {
         //     return(
-        //         <tbody key={index}>
         //             <tr>
         //                 <td>{item.team_id}</td>
         //                 <td>{item.teamName}</td>
-        //                 <td>{item.lastName}</td> 
+        //                 <td>{item.lastName}</td>
         //             </tr>
-        //         </tbody>
         //     )
         // })
+        // let thirdList = thirdArray.map((item, index) => {
+        //     return(
+        //         <>
+        //             <td>{item.avgTier}</td>
+        //             {/* <td>{item.teamName}</td>
+        //             <td>{item.lastName}</td> */}
+        //         </>
+        //     )
+        // })
+        const list = this.props.store.getAdminTotalTeamSalesReducer.map((item, index) => {
+            return(
+                            <tr key={index}>
+                                <td>{item.team_id}</td>
+                                <td>{item.teamName}</td>
+                                <td>{item.lastName}</td>
+                                <td>{item.avgTier}</td>
+                                <td>{item.productsSold}</td>
+                                <td>{}</td>
+                                <td>{}</td>
+                                <td>{item.productsSoldPerTeam}</td>
+                                <td>{item.salesPerTeam}</td>
+                                <td>{item.totalTeamCommissions}</td>
+                            </tr>
+                    )
+        })
+
         return (
             <div>
                 
                 <h2>{this.state.heading}</h2>
-                <h3>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer)}</h3>
+                <h1>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer)}</h1>
+                {/* <h3>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamSalesTotal)}</h3>
+                <h3>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamIDIndividualProductsSold)}</h3> */}
                 <table>
                     <thead>
                         <tr>
@@ -50,7 +83,13 @@ class AdminAllSalesPage extends Component {
                             <th>Total Commissions</th>
                         </tr>
                     </thead>
-                        {/* {teamSalesList} */}
+                    <tbody>
+                            {list}
+                            {/* {mgrList}
+                            {thirdList} */}
+                        
+                    </tbody>
+                        
                 </table>
             </div>
         );
