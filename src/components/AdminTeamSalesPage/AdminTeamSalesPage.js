@@ -48,7 +48,31 @@ class AdminAllSalesPage extends Component {
                             </tr>
                     )
         })
-
+        const salesByEmpList = this.props.store.getAdminSalesByEmpReducer.map((item, index) => {
+            const productsSoldList = item.products;
+            const productId1QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 1;
+            });
+            const productId2QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 2;
+            });
+            const productId3QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 3;
+            });
+            return(
+                <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.lastName}</td>
+                    <td>{item.bonusTier}</td>
+                    <td>{productId1QuantityList.length > 0 ? productId1QuantityList[0].productsSold : 0}</td>
+                    <td>{productId2QuantityList.length > 0 ? productId2QuantityList[0].productsSold : 0}</td>
+                    <td>{productId3QuantityList.length > 0 ? productId3QuantityList[0].productsSold : 0}</td>
+                    <td>{item.productsSold}</td>
+                    <td>{item.total_sales}</td>
+                    <td>{item.totalTeamCommissions}</td>
+                </tr>
+        )
+        })
         return (
             <div>
                 
@@ -92,7 +116,7 @@ class AdminAllSalesPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                            {totalTeamSalesList}
+                            {salesByEmpList}
                     </tbody>    
                 </table>
             </div>
