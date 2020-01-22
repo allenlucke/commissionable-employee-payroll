@@ -17,51 +17,47 @@ class AdminRosterPage extends Component {
     }
 
     render() {
-        // const allSalesList = this.props.store.getAdminAllSalesReducer.map((item, index) => {
-        //     return(
-        //         <tbody key={index}>
-        //             <tr>
-        //                 <td>{item.empid}</td>
-        //                 <td>{item.team_id}</td>
-        //                 <td>{item.lastName}</td>
-        //                 <td>{item.bonusTier}</td>
-        //                 <td>{item.transactionNumber}</td>
-        //                 <td>{item.salesID}</td>
-        //                 <td>{item.orderDate}</td>
-        //                 <td>{item.productName}</td>
-        //                 <td>{item.unitsSold}</td>
-        //                 <td>{item.costPerUnit}</td>
-        //                 <td>{item.pricePerUnit}</td>
-        //                 <td>{item.unitsSold*item.pricePerUnit}</td>
-        //                 <td>{item.commission}</td>
-        //             </tr>
-        //         </tbody>
-        //     )
-        // })
+        const roster = this.props.store.getAdminRosterReducer.map((item, index) => {
+            return(
+                <tbody key={index}>
+                    <tr >
+                        <td>{item.id}</td>
+                        <td>{item.firstName}</td>
+                        <td>{item.lastName}</td>
+                        <td>{item.position}</td>
+                        <td>{item.securityLevel}</td>
+                        <td>{item.hireDate}</td>
+                        <td>{item.baseSalary}</td>
+                        <td>{item.bonusTier}</td>
+                        <td>{item.team_id}</td>
+                        <td>{item.teamName}</td>                
+                        {/* <td>Terminate</td> */}
+                    </tr>
+                </tbody>
+            )
+        })
         return (
             <div>
                 
                 <h2>{this.state.heading}</h2>
-                {/* <table>
+                <table>
                     <thead>
                         <tr>
                             <th>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Position</th>
+                            <th>Security Level</th>
+                            <th>Hire Date</th>
+                            <th>Base Salary</th>
+                            <th>Bonus Tier</th>
                             <th>Team ID</th>
-                            <th>Employee Last Name</th>
-                            <th>Employee Tier</th>
-                            <th>Transaction Number</th>
-                            <th>Order ID</th>
-                            <th>Order Date</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Cost Per Unit</th>
-                            <th>Price Per Unit</th>
-                            <th>Extended Price</th>
-                            <th>Approximate Commission</th>
+                            <th>Team Name</th>
+                            <th>Terminate Employee</th>
                         </tr>
                     </thead>
-                        {allSalesList}
-                </table> */}
+                        {roster}
+                </table>
             </div>
         );
     }

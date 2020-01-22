@@ -1,6 +1,6 @@
 const getAdminAllSalesReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ROSTER':
+        case 'SET_ADMIN_ROSTER':
             return action.payload;
         default:
             return state;

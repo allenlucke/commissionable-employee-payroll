@@ -7,11 +7,12 @@ const { rejectUnauthenticated } = require('./../../modules/authentication-middle
 
 //Get Route for Admin Roster Page
 router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
-    console.log(req.body)
     const userID = req.params.userID;
     const userSecLvl = req.params.userSecLvl;
-    
-    const queryString = `SELECT "employees".id, "employees"."firstName", "employees"."lastName", "employees".position, "employees"."securityLevel", "employees"."hireDate", "employees"."baseSalary", "employees".team_id,"teams"."teamName" FROM "employees"
+    const queryString = `SELECT "employees".id, "employees"."firstName", 
+    "employees"."lastName", "employees".position, "employees"."securityLevel", 
+    "employees"."hireDate", "employees"."baseSalary", 
+    "employees".team_id,"teams"."teamName", "employees"."bonusTier" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
     ORDER BY "employees".id ASC;`;
     if (userSecLvl >= 10 ) {
