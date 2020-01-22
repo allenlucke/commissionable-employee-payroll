@@ -16,63 +16,88 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
     WHERE "employees"."securityLevel" =5
     ORDER BY "teams".id ASC;`;
     if (userSecLvl >= 10 ) {
-    pool.query(queryString)
-    .then((response1) => {
-        //Querystring for total products sold and total sales per team
-        const queryString = `SELECT SUM("sales_products"."unitsSold")
-        AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit")
-        AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold")
-        AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
-        JOIN "teams" ON "employees".team_id = "teams".id
-        JOIN "sales" ON "employees".id = "sales".employees_id
-        JOIN "sales_products" ON "sales".id = "sales_products".sales_id
-        JOIN "products" ON "sales_products".product_id = "products".id
-        JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
-        GROUP BY "teams".id
-        ORDER BY "teams".id ASC;`;
         pool.query(queryString)
-        .then((response2) => {
-            //Querystring for amount of products sold by individual teams
-            const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id
-            AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
-            JOIN "teams" ON "employees".team_id = "teams".id
-            JOIN "sales" ON "employees".id = "sales".employees_id
-            JOIN "sales_products" ON "sales".id = "sales_products".sales_id
-            JOIN "products" ON "sales_products".product_id = "products".id
-            GROUP BY "teams".id, "products"."productName", "products".id
-            ORDER BY "teams".id ASC;`;
-            pool.query(queryString)
-            .then((response3) => {
-                
-                res.send([
-                    ...response1.rows,
-                    ...response2.rows,
-                    ...response3.rows,
-                ])
-                // let newResponse1 = response1.rows.map((item, index) => {
-                //     let newItem = {
-                //         ...item
-                //     };
-                //     return newItem;
-                //     let newResponse2 = response2
-                // })
-                // res.send({
-                //     teamNameManager: response1.rows,
-                //     teamSalesTotal: response2.rows,
-                //     teamIDIndividualProductsSold: response3.rows,
-                // })
+            .then((responseTeamWithManager) => {
+                //Querystring for total products sold and total sales per team
+                const queryString = `SELECT SUM("sales_products"."unitsSold")
+                AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit")
+                AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold")
+                AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier", "teams"."id" as "team_id" FROM "employees"
+                JOIN "teams" ON "employees".team_id = "teams".id
+                JOIN "sales" ON "employees".id = "sales".employees_id
+                JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+                JOIN "products" ON "sales_products".product_id = "products".id
+                JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+                GROUP BY "teams".id
+                ORDER BY "teams".id ASC;`;
+                pool.query(queryString)
+                .then((responseTotalProductSold) => {
+                    //Querystring for amount of products sold by individual teams
+                    const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id
+                    AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+                    JOIN "teams" ON "employees".team_id = "teams".id
+                    JOIN "sales" ON "employees".id = "sales".employees_id
+                    JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+                    JOIN "products" ON "sales_products".product_id = "products".id
+                    GROUP BY "teams".id, "products"."productName", "products".id
+                    ORDER BY "teams".id ASC;`;
+                    pool.query(queryString)
+                    .then((responseTeamProducts) => {
+                        const teamsWithManager = responseTeamWithManager.rows;
+                        const teamsTotalProductsSold = responseTotalProductSold.rows;
+                        const teamsProductsSold = responseTeamProducts.rows;
+                        console.log(responseTeamWithManager.rows)
+                        console.log(responseTotalProductSold.rows)
+                        console.log(responseTeamProducts.rows);
+
+                        const newTeamsDataArray = teamsWithManager.map((teamItem) => {
+                            const teamId = teamItem.team_id;
+                            // assumed that there will always be only one team matching
+                            const teamMatchForTotalProducts = teamsTotalProductsSold.filter((item) => {
+                                return item.team_id === teamId;
+                            });
+                            const teamMatchForProductsSold = teamsProductsSold.filter((item) => {
+                                return item.teamID === teamId;
+                            });
+                            const teamData = {
+                                ...teamItem,
+                                ...teamMatchForTotalProducts[0],
+                                products: [
+                                    ...teamMatchForProductsSold
+                                ]
+                            };
+
+                            return teamData;
+                        });
+
+                        console.log('\n---------------\n', newTeamsDataArray);
+                        
+                        res.send(newTeamsDataArray);
+                        // let newresponseTeamWithManager = responseTeamWithManager.rows.map((item, index) => {
+                        //     let newItem = {
+                        //         ...item
+                        //     };
+                        //     return newItem;
+                        //     let newresponseTotalProductSold = responseTotalProductSold
+                        // })
+                        // res.send({
+                        //     teamNameManager: responseTeamWithManager.rows,
+                        //     teamSalesTotal: responseTotalProductSold.rows,
+                        //     teamIDIndividualProductsSold: responseTeamProducts.rows,
+                        // })
+                    })   
+                    .catch((err) => {
+                        res.sendStatus(500);
+                    })
+                })   
+                .catch((err) => {
+                    res.sendStatus(500);
+                })
             })   
             .catch((err) => {
                 res.sendStatus(500);
             })
-        })   
-        .catch((err) => {
-            res.sendStatus(500);
-        })
-    })   
-    .catch((err) => {
-        res.sendStatus(500);
-    })}
+    }
 });
 
 //Get route for Sales By Employee - Admin Team Sales Page
