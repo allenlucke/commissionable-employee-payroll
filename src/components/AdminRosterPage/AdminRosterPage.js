@@ -15,7 +15,14 @@ class AdminRosterPage extends Component {
             payload: this.props.store.user
         })
     }
-
+    //Need to set up saga and reducer for delete
+    deleteEmployee = (event, id) => {
+        this.props.dispatch({
+            type: 'ADMIN_DELETE_EMP',
+            payload: this.props.user + id 
+            
+        })
+    }
     render() {
         const roster = this.props.store.getAdminRosterReducer.map((item, index) => {
             return(
@@ -31,7 +38,8 @@ class AdminRosterPage extends Component {
                         <td>{item.bonusTier}</td>
                         <td>{item.team_id}</td>
                         <td>{item.teamName}</td>                
-                        {/* <td>Terminate</td> */}
+                        <td><button onClick={(event) =>this.deleteEmployee(event, item.id)}>
+                        Terminate</button></td>
                     </tr>
                 </tbody>
             )
