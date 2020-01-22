@@ -66,7 +66,6 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
                                     ...teamMatchForProductsSold
                                 ]
                             };
-
                             return teamData;
                         });
 
@@ -104,7 +103,7 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
     ORDER BY "employees".id;`;
     if (userSecLvl >= 10 ) {
     pool.query(queryString)
-    .then((response1) => {
+    .then((responseEmpWithTotSales) => {
         //Querystring for total sales by employee by product
         const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", 
         "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
@@ -114,11 +113,29 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
         GROUP BY "products"."productName", "products".id, "employees".id
         ORDER BY "employees".id ASC;`;
         pool.query(queryString)
-        .then((response2) => {
-            res.send({
-                salesByEmployee: response1.rows,
-                salesByProduct: response2.rows,
-            })
+        .then((responseEmpSalesByProduct) => {
+            const empWithTotSales = responseEmpWithTotSales.rows;
+            const empSalesByProduct = responseEmpSalesByProduct.rows;
+            console.log(responseEmpWithTotSales.rows)
+            console.log(responseEmpSalesByProduct.rows);
+
+            const newEmpDataArray = empWithTotSales.map((empItem) => {
+                const empID = empItem.id;
+                // assumed that there will always be only one employee matching
+                const empMatchForSalesByProduct = empSalesByProduct.filter((item ) => {
+                    return item.employeesID === empID;
+                });
+                const empData = {
+                    ...empItem,
+                    products: [
+                        ...empMatchForSalesByProduct
+                    ]
+                };
+                return empData;
+            });
+            console.log('n---------------------n', newEmpDataArray);
+
+            res.send(newEmpDataArray)
         })    
         .catch((err) => {
             res.sendStatus(500);
