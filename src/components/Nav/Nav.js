@@ -35,6 +35,9 @@ const Nav = (props) => (
           <Link className="nav-link" to="/change">
             Change Password
           </Link>
+          <Link className="nav-link" to="/adminAddEmp">
+            Admin Add Employee
+          </Link>
           <LogOutButton className="nav-link"/>
         </>
       )}

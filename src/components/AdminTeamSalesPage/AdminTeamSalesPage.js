@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-class AdminAllSalesPage extends Component {
+class AdminTeamSalesPage extends Component {
     state = {
         heading1: 'Admin Team Sales Page',
         heading2: 'Total Team Sales',
@@ -124,4 +124,4 @@ class AdminAllSalesPage extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(AdminAllSalesPage);
+export default connect(mapStoreToProps)(AdminTeamSalesPage);
