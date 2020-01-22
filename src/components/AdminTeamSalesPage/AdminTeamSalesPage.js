@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-// const mapStateToProps = reduxState => ({
-//     reduxState,
-// })
 
 class AdminAllSalesPage extends Component {
     state = {
@@ -17,12 +14,15 @@ class AdminAllSalesPage extends Component {
             this.props.dispatch({
             type: 'GET_ADMIN_TOTAL_TEAM_SALES',
             payload: this.props.store.user
-            
+        })
+            this.props.dispatch({
+            type: 'GET_ADMIN_SALES_BY_EMPLOYEE',
+            payload: this.props.store.user
         })
     }
 
     render() {
-        const list = this.props.store.getAdminTotalTeamSalesReducer.map((item, index) => {
+        const totalTeamSalesList = this.props.store.getAdminTotalTeamSalesReducer.map((item, index) => {
             const productsSoldList = item.products;
             const productId1QuantityList = productsSoldList.filter((item) => {
                 return item.productID === 1;
@@ -73,13 +73,28 @@ class AdminAllSalesPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                            {list}
-                            {/* {mgrList}
-                            {thirdList} */}
-                        
+                            {totalTeamSalesList}
                     </tbody>    
                 </table>
-                        <h3>{this.state.heading3}</h3>
+                <h3>{this.state.heading3}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Last Name</th>
+                            <th>Bonus Tier</th>
+                            <th>Product1</th>
+                            <th>Product2</th>
+                            <th>Product3</th>
+                            <th>Total Products</th>
+                            <th>Total Sales</th>
+                            <th>Total Commissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {totalTeamSalesList}
+                    </tbody>    
+                </table>
             </div>
         );
     }

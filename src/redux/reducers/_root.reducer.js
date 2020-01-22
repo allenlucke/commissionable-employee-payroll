@@ -4,6 +4,7 @@ import loginMode from './loginMode.reducer';
 import user from './user.reducer';
 import getAdminAllSalesReducer from './getAdminAllSales.reducer';
 import getAdminTotalTeamSalesReducer from './getAdminTotalTeamSales.reducer';
+import getAdminSalesByEmpReducer from './getAdminSalesByEmp.reducer';
 import getAdminRosterReducer from './getAdminRoster.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   getAdminAllSalesReducer,
   getAdminTotalTeamSalesReducer,
+  getAdminSalesByEmpReducer,
   getAdminRosterReducer,
 });
 

@@ -73,18 +73,6 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
                         console.log('\n---------------\n', newTeamsDataArray);
                         
                         res.send(newTeamsDataArray);
-                        // let newresponseTeamWithManager = responseTeamWithManager.rows.map((item, index) => {
-                        //     let newItem = {
-                        //         ...item
-                        //     };
-                        //     return newItem;
-                        //     let newresponseTotalProductSold = responseTotalProductSold
-                        // })
-                        // res.send({
-                        //     teamNameManager: responseTeamWithManager.rows,
-                        //     teamSalesTotal: responseTotalProductSold.rows,
-                        //     teamIDIndividualProductsSold: responseTeamProducts.rows,
-                        // })
                     })   
                     .catch((err) => {
                         res.sendStatus(500);
