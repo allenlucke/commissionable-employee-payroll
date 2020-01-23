@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-// console.log(this.props.store.user)
 class AdminRosterPage extends Component {
     state = {
         heading: 'Admin Roster Page',
+        update: false,
     };
     
     componentDidMount() {
@@ -15,15 +15,27 @@ class AdminRosterPage extends Component {
             payload: this.props.store.user
         })
     }
-    //Need to set up saga and reducer for delete
     deleteEmployee = (event, id) => {
+        const empID = id;
+        const userID = this.props.store.user.id;
+        const userSecLvl = this.props.store.user.securityLevel;
+        const empDeleteDataForServer = {
+            empID: empID,
+            userSecLvl: userSecLvl,
+            userID: userID
+        }
         this.props.dispatch({
             type: 'ADMIN_DELETE_EMP',
-            payload: this.props.user + id 
-            
-        })
+            payload: empDeleteDataForServer
+        });
+        this.props.dispatch({
+            type: 'GET_ADMIN_ROSTER',
+            payload: this.props.store.user
+        });
     }
+    
     render() {
+        
         const roster = this.props.store.getAdminRosterReducer.map((item, index) => {
             return(
                 <tbody key={index}>

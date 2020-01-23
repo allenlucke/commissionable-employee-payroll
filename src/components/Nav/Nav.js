@@ -20,6 +20,7 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.store.user.id && (
         <>
+        
           <Link className="nav-link" to="/adminHome">
             Admin Home Page
           </Link>
@@ -39,6 +40,7 @@ const Nav = (props) => (
             Admin Add Employee
           </Link>
           <LogOutButton className="nav-link"/>
+        
         </>
       )}
       {/* Always show this link since the about page is not protected */}

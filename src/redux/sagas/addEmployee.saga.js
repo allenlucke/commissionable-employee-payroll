@@ -17,5 +17,5 @@ function* addEmployee(action) {
 function* addEmployeeSaga() {
     yield takeLatest('ADD_EMPLOYEE', addEmployee);
 }
-
+ 
 export default addEmployeeSaga;

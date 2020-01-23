@@ -25,9 +25,10 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
     })}
 });
 //Delete Router for delete employee on Admin Roster Page
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    const empID = req.params.id;
-    const userSecLvl = req.body.userSecurityLevel;
+router.delete('/:empID/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
+    const empID = req.params.empID;
+    const userID = req.params.userID;
+    const userSecLvl = req.params.userSecLvl;
     const queryString = `DELETE FROM "employees" WHERE "id" = ${empID};`;
     if (userSecLvl >= 10 ) {
     pool.query(queryString)
