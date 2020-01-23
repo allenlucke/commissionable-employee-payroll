@@ -8,18 +8,18 @@ function* getSalespersonHomePage(action) {
     try {
         const response = yield axios({
             method: 'GET',
-            url: '/api/admin/teamSales/empSales/' + userSecLvl + '/' + userID,  
+            url: '/api/salesperson/' + userSecLvl + '/' + userID,  
         })
         yield put({
-            type: 'SET_ADMIN_SALES_BY_EMPLOYEE',
+            type: 'SET_SALESPERSON_HOMEPAGE',
             payload: response.data
         });
     } catch(err) {
-        console.log('Error fetching all sales', err);
+        console.log('Error fetching employee', err);
     }
 }
 function* getSalespersonHomePageSaga() {
-    yield takeLatest('GET_ADMIN_SALES_BY_EMPLOYEE', getSalespersonHomePage);
+    yield takeLatest('GET_SALESPERSON_HOMEPAGE', getSalespersonHomePage);
 }
 
 export default getSalespersonHomePageSaga;

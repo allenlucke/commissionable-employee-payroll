@@ -40,7 +40,9 @@ const Nav = (props) => (
             Admin Add Employee
           </Link>
           <LogOutButton className="nav-link"/>
-        
+          <Link className="nav-link" to="/salespersonHomePage">
+            Salesperson Home Page
+          </Link>
         </>
       )}
       {/* Always show this link since the about page is not protected */}

@@ -7,7 +7,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // value setup. When making a new component be sure to replace 
 // the component name TemplateClass with the name for the new 
 // component.
-class AdminHomePage extends Component {
+class SalespersonHomePage extends Component {
     state = {
         heading: 'Salesperson Home Page',
     };
@@ -15,21 +15,26 @@ class AdminHomePage extends Component {
     componentDidMount() {
         this.props.dispatch({
         type: 'GET_SALESPERSON_HOMEPAGE',
-        payload: this.props.store.user
-        
+        payload: this.props.store.user 
     })
 }
     render() {
-        
+        const teamName = this.props.store.getSalespersonHomePageReducer.map((item, index) => {
+            console.log(item.teamName)
+            return(
+                <div key={index}>
+                    <p>Your Team is: {item.teamName}</p>
+                </div>
+            )
+        })
         return (
             <div>
                 <h2>{this.state.heading}</h2>
-
                 <p>Hello, {this.props.store.user.firstName}</p>
-                <p>Your Team is: {}</p>
+                {teamName}
             </div>
         );
     }
 }
 
-export default connect(mapStoreToProps)(AdminHomePage);
+export default connect(mapStoreToProps)(SalespersonHomePage);

@@ -9,7 +9,7 @@ import getAdminRosterSaga from './getAdminRoster.saga';
 import getAdminSalesByEmpSaga from './getAdminSalesByEmp.saga';
 import addEmployeeSaga from './addEmployee.saga';
 import deleteAdminRosterSaga from './deleteAdminRoster.saga ';
-import getSalespersonHomePageInfoSaga from './getSalespersonHomePage.saga';
+import getSalespersonHomePageSaga from './getSalespersonHomePage.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -30,6 +30,6 @@ export default function* rootSaga() {
     getAdminRosterSaga(),
     addEmployeeSaga(),
     deleteAdminRosterSaga(),
-    getSalespersonHomePageInfoSaga(),
+    getSalespersonHomePageSaga(),
   ]);
 }
