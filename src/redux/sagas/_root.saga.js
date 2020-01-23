@@ -7,6 +7,7 @@ import getAdminAllSalesSaga from './getAdminAllSales.saga';
 import getAdminTotalTeamSalesSaga from './getAdminTotalTeamSales.saga';
 import getAdminRosterSaga from './getAdminRoster.saga';
 import getAdminSalesByEmpSaga from './getAdminSalesByEmp.saga';
+import addEmployeeSaga from './addEmployee.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     getAdminTotalTeamSalesSaga(),
     getAdminSalesByEmpSaga(),
     getAdminRosterSaga(),
+    addEmployeeSaga(),
   ]);
 }

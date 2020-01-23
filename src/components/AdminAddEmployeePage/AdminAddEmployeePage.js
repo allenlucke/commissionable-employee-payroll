@@ -12,12 +12,12 @@ class AdminAddEmployeePage extends Component {
             lastName: '',
             username: '',
             password: '',
-            email: '',
+            email: 'allenlucke@gmail.com',
             position: '',
-            securityLevel: 0,
+            securityLevel: '',
             hireDate: '',
-            baseSalary: 0,
-            team_id: 0,
+            baseSalary: '',
+            team_id: '',
         }
     };
     handleInputChange = (event, inputKey) => {
@@ -29,10 +29,19 @@ class AdminAddEmployeePage extends Component {
         });
     }
     addNewEmployee = (event, inputKey) => {
+        const empToAdd = this.state.newEmployee;
+        const userInfo = this.props.store.user;
+        const userSecurityLevel = userInfo.securityLevel;
+        const userID = userInfo.id;
+        const newEmpDataForServer = {
+            ...empToAdd,
+            userSecurityLevel: userSecurityLevel,
+            userID: userID
+        }
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_EMPLOYEE',
-            payload: this.state.newEmployee 
+            payload: newEmpDataForServer              
         })
             this.setState({
                 newEmployee: {
@@ -40,12 +49,12 @@ class AdminAddEmployeePage extends Component {
                 lastName: '',
                 username: '',
                 password: '',
-                email: '',
+                email: 'allenlucke@gmail.com',
                 position: '',
-                securityLevel: 0,
+                securityLevel: '',
                 hireDate: '',
-                baseSalary: 0,
-                team_id: 0,
+                baseSalary: '',
+                team_id: '',
                 }
             })
         }

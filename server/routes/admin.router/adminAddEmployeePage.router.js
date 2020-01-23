@@ -10,6 +10,8 @@ const userStrategy = require('./../../strategies/user.strategy');
 
 // Post Route Admin Add Employee Page
 router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body.userSecurityLevel)
+    const userID = req.body.userID;
     const userSecLvl = req.body.userSecurityLevel;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
