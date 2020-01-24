@@ -21,6 +21,7 @@ import AdminTeamSalesPage from '../AdminTeamSalesPage/AdminTeamSalesPage';
 import AdminRosterPage from '../AdminRosterPage/AdminRosterPage';
 import AdminAddEmployeePage from '../AdminAddEmployeePage/AdminAddEmployeePage';
 import SalespersonHomePage from '../SalespersonHomePage/SalespersonHomePage';
+import SalespersonAddSalePage from '../SalespersonAddSalePage/SalespersonAddSalePage';
 import './App.css';
 
 class App extends Component {
@@ -89,6 +90,12 @@ class App extends Component {
               path="/salespersonHomePage"
               // authRedirect="/admin"
               component={SalespersonHomePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/salespersonAddSalePage"
+              // authRedirect="/admin"
+              component={SalespersonAddSalePage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.

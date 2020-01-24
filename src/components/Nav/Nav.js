@@ -14,10 +14,11 @@ const Nav = (props) => (
       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
-        and call this link 'Login / Register' if they are not */}
-        {props.store.user.id ? 'Home' : 'Login / Change Password'}
+        and call this link 'Login' if they are not */}
+        {props.store.user.id ? 'Home' : 'Login'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
+      
       {props.store.user.id && (
         <>
         
@@ -40,8 +41,13 @@ const Nav = (props) => (
             Admin Add Employee
           </Link>
           <LogOutButton className="nav-link"/>
+
+
           <Link className="nav-link" to="/salespersonHomePage">
             Salesperson Home Page
+          </Link>
+          <Link className="nav-link" to="/salespersonAddSalePage">
+            Salesperson Add Sale Page
           </Link>
         </>
       )}
