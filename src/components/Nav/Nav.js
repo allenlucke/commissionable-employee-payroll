@@ -21,7 +21,8 @@ const Nav = (props) => (
       
       {props.store.user.id && (
         <>
-        
+          {props.store.user.securityLevel  >= 10 && (
+          <>
           <Link className="nav-link" to="/adminHome">
             Admin Home Page
           </Link>
@@ -34,15 +35,14 @@ const Nav = (props) => (
           <Link className="nav-link" to="/adminRoster">
             Admin Roster Page
           </Link>
-          <Link className="nav-link" to="/change">
-            Change Password
-          </Link>
+          
           <Link className="nav-link" to="/adminAddEmp">
             Admin Add Employee
           </Link>
-          <LogOutButton className="nav-link"/>
-
-
+          </>
+          )}
+          {props.store.user.securityLevel  <= 5 && (
+            <>
           <Link className="nav-link" to="/salespersonHomePage">
             Salesperson Home Page
           </Link>
@@ -52,6 +52,10 @@ const Nav = (props) => (
           <Link className="nav-link" to="/salespersonViewSalesPage">
             Salesperson View Sales Page
           </Link>
+            </>
+          )}
+          <LogOutButton className="nav-link"/>
+
         </>
       )}
       {/* Always show this link since the about page is not protected */}
