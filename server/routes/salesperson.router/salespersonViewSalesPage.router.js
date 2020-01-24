@@ -13,6 +13,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     "sales"."transactionNumber", "sales".id AS "salesID", "sales"."orderDate", 
     "products"."productName", "sales_products"."unitsSold",
     "products"."costPerUnit", "products"."pricePerUnit", 
+    SUM("products"."pricePerUnit" * "sales_products"."unitsSold") AS "extendedPrice",
     SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") 
     AS "estCommission" FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id

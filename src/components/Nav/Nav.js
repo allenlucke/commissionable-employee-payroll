@@ -49,6 +49,9 @@ const Nav = (props) => (
           <Link className="nav-link" to="/salespersonAddSalePage">
             Salesperson Add Sale Page
           </Link>
+          <Link className="nav-link" to="/salespersonViewSalesPage">
+            Salesperson View Sales Page
+          </Link>
         </>
       )}
       {/* Always show this link since the about page is not protected */}

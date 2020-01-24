@@ -12,11 +12,14 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
     const queryString = `SELECT "employees".id AS empID, "employees".team_id,
     "employees"."lastName", "employees"."bonusTier", "sales"."transactionNumber",
     "sales".id AS "salesID", "sales"."orderDate", "products"."productName", "sales_products"."unitsSold",
+    SUM("products"."pricePerUnit" * "sales_products"."unitsSold") AS "extendedPrice",
     "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier FROM "employees"
     JOIN "sales" ON "employees".id = "sales".employees_id
     JOIN "sales_products" ON "sales".id = "sales_products".sales_id
     JOIN "products" ON "sales_products".product_id = "products".id
-    JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id;`;
+    JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+    GROUP BY "employees".id, "sales"."transactionNumber", "sales".id, "products"."productName", 
+    "sales_products"."unitsSold", "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier;`;
     if (userSecLvl >= 10 ) {
     pool.query(queryString)
     .then((response) => {
@@ -36,3 +39,13 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
 });
 
 module.exports = router;
+
+// SELECT "employees".id AS empID, "employees".team_id,
+//     "employees"."lastName", "employees"."bonusTier", "sales"."transactionNumber",
+//     "sales".id AS "salesID", "sales"."orderDate", "products"."productName", "sales_products"."unitsSold",
+//     SUM("products"."pricePerUnit" * "sales_products"."unitsSold") AS "extendedPrice",
+//     "products"."costPerUnit", "products"."pricePerUnit", "bonusTier".modifier FROM "employees"
+//     JOIN "sales" ON "employees".id = "sales".employees_id
+//     JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+//     JOIN "products" ON "sales_products".product_id = "products".id
+//     JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id;

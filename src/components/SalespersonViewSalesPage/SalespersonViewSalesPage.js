@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-// console.log(this.props.store.user)
-class AdminAllSalesPage extends Component {
+class SalespersonViewSalesPage extends Component {
     state = {
-        heading: 'Admin All Sales Page',
+        heading: 'Salesperson View Sales Page',
     };
     
     componentDidMount() {
             this.props.dispatch({
-            type: 'GET_ADMIN_ALL_SALES',
+            type: 'GET_SALESPERSON_ALL_SALES',
             payload: this.props.store.user
         })
     }
@@ -21,10 +20,6 @@ class AdminAllSalesPage extends Component {
             return(
                 <tbody key={index}>
                     <tr>
-                        <td>{item.empid}</td>
-                        <td>{item.team_id}</td>
-                        <td>{item.lastName}</td>
-                        <td>{item.bonusTier}</td>
                         <td>{item.transactionNumber}</td>
                         <td>{item.salesID}</td>
                         <td>{item.orderDate}</td>
@@ -33,7 +28,7 @@ class AdminAllSalesPage extends Component {
                         <td>{item.costPerUnit}</td>
                         <td>{item.pricePerUnit}</td>
                         <td>{item.extendedPrice}</td>
-                        <td>{item.commission}</td>
+                        <td>{item.estCommission}</td>
                     </tr>
                 </tbody>
             )
@@ -45,10 +40,6 @@ class AdminAllSalesPage extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>Employee ID</th>
-                            <th>Team ID</th>
-                            <th>Employee Last Name</th>
-                            <th>Employee Tier</th>
                             <th>Transaction Number</th>
                             <th>Order ID</th>
                             <th>Order Date</th>
@@ -67,4 +58,4 @@ class AdminAllSalesPage extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(AdminAllSalesPage);
+export default connect(mapStoreToProps)(SalespersonViewSalesPage);
