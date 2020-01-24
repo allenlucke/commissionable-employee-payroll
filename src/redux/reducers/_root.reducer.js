@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import errors from './errors.reducer';
-import loginMode from './loginMode.reducer';
-import user from './user.reducer';
+import errors from './userReducers/errors.reducer';
+import loginMode from './userReducers/loginMode.reducer';
+import user from './userReducers/user.reducer';
 import getAdminAllSalesReducer from './adminReducers/getAdminAllSales.reducer';
 import getAdminTotalTeamSalesReducer from './adminReducers/getAdminTotalTeamSales.reducer';
 import getAdminSalesByEmpReducer from './adminReducers/getAdminSalesByEmp.reducer';

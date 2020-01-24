@@ -50,9 +50,12 @@ class SalespersonAddSalePage extends Component {
             <div>
                 <h2>{this.state.heading}</h2>
                 <form onSubmit={this.addNewEmployee}>
-                    <input type='text' placeholder='Product' value={this.state.newSale.product_id}
-                    onChange={(event) => this.handleInputChange(event, 'product_id')} />
-                    <input type='text' placeholder='Quantity' value={this.state.newSale.unitsSold}
+                    <select onChange={(event) => this.handleInputChange(event, this.state.newSale.product_id = event.target.value )}>
+                        <option value='1'>Product1</option>
+                        <option value='2'>Product2</option>
+                        <option value='3'>Product3</option>
+                    </select>
+                    <input type='number' placeholder='Quantity' value={this.state.newSale.unitsSold}
                     onChange={(event) => this.handleInputChange(event, 'unitsSold')} />
                     <input type='text' placeholder='Transaction Number' value={this.state.newSale.transactionNumber}
                     onChange={(event) => this.handleInputChange(event, 'transactionNumber')} />
