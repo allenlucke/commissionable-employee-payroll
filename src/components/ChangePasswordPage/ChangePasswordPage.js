@@ -20,6 +20,7 @@ class ChangePasswordPage extends Component {
           password: this.state.password,
         },
       });
+      this.props.history.push('/login');
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }

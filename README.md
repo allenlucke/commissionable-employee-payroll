@@ -113,3 +113,23 @@ This code is also heavily commented. We recommend reading through the comments, 
 ## Update Documentation
 
 Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+
+# Redux-Feedback-Loop
+
+## Description
+Duration: Two-Week Sprint
+
+The Redux-Feedback-Loop is a Single Page Application designed as a daily feedback form. Users may input their feedback by clicking on the radio button of the form, as well as adding a comment in the comment section.
+
+## Screenshots
+
+## Usage
+
+## Built with
+React, Redux, html, CSS, Node, Express, Javascript, PostgreSQL, Logger, Body-Parser
+
+## Acknowledgement
+Thanks to Prime Digital Academy in Kansas City who equipped and helped me to make this application a reality. Specifically Scott, Myron, and the Tyto cohort.
+
+## Support
+If you have suggestions or issues, please email me at allenlucke@gmail.com
