@@ -16,7 +16,7 @@ class SalespersonViewSalesPage extends Component {
     }
 
     render() {
-        const allSalesList = this.props.store.getAdminAllSalesReducer.map((item, index) => {
+        const allSalesList = this.props.store.getSalespersonViewSalesReducer.map((item, index) => {
             return(
                 <tbody key={index}>
                     <tr>

@@ -6,9 +6,9 @@ const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Salesperson View Sales/Commissions Page
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const userSecLvl = req.body.userSecurityLevel;
+router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.userID;
+    const userSecLvl = req.params.userSecLvl;
     const queryString = `SELECT "employees".id, "employees"."bonusTier", 
     "sales"."transactionNumber", "sales".id AS "salesID", "sales"."orderDate", 
     "products"."productName", "sales_products"."unitsSold",

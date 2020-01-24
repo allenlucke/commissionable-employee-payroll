@@ -11,6 +11,7 @@ import addEmployeeSaga from './addEmployee.saga';
 import deleteAdminRosterSaga from './deleteAdminRoster.saga ';
 import getSalespersonHomePageSaga from './getSalespersonHomePage.saga';
 import addSaleSaga from './addSale.saga';
+import getSalespersonViewSalesSaga from './getSalespersonViewSales.saga';
 
 
 // rootSaga is the primary saga.
@@ -34,5 +35,6 @@ export default function* rootSaga() {
     deleteAdminRosterSaga(),
     getSalespersonHomePageSaga(),
     addSaleSaga(),
+    getSalespersonViewSalesSaga(),
   ]);
 }
