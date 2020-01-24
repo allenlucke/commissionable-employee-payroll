@@ -24,6 +24,8 @@ class AdminTeamSalesPage extends Component {
     render() {
         const totalTeamSalesList = this.props.store.getAdminTotalTeamSalesReducer.map((item, index) => {
             const productsSoldList = item.products;
+            // const newAvgTier = item.avgTier;
+            // console.log((newAvgTier).toFixed(2))
             const productId1QuantityList = productsSoldList.filter((item) => {
                 return item.productID === 1;
             });

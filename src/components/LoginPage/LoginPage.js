@@ -24,6 +24,7 @@ class LoginPage extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
+      this.props.history.push('/home');
   } // end login
 
   handleInputChangeFor = propertyName => (event) => {
@@ -76,24 +77,6 @@ class LoginPage extends Component {
             />
           </div>
         </form>
-        <center>
-          {/* <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
-            Register
-          </button> */}
-        </center>
-        {/* <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_CHANGE_PASSWORD_MODE'})}}
-          >
-            Change Password
-          </button>
-        </center> */}
       </div>
     );
   }

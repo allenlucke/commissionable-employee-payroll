@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 function* deleteAdminRoster(action) {
     console.log(action.payload);
@@ -7,7 +7,7 @@ function* deleteAdminRoster(action) {
     const userSecLvl = action.payload.userSecLvl;
     const userID = action.payload.userID
     try {
-        const response = yield axios({
+        yield axios({
             method: 'DELETE',
             url: '/api/admin/roster/' + empID + '/' + userSecLvl + '/' + userID, 
         });

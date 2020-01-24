@@ -70,7 +70,7 @@ class ChangePasswordPage extends Component {
             <label htmlFor="confirmedPassword">
               Password:
               <input
-                type="confirmedPassword"
+                type="password"
                 name="confirmedPassword"
                 value={this.state.confirmedPassword}
                 onChange={this.handleInputChangeFor('confirmedPassword')}
@@ -86,15 +86,6 @@ class ChangePasswordPage extends Component {
             />
           </div>
         </form>
-        {/* <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button>
-        </center> */}
       </div>
     );
   }

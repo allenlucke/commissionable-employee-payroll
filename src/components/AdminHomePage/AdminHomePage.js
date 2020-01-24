@@ -12,13 +12,6 @@ class AdminHomePage extends Component {
         heading: 'Admin Home Page',
     };
 
-    componentDidMount() {
-    //     this.props.dispatch({
-    //     type: 'GET_ADMIN_TOTAL_TEAM_SALES',
-    //     payload: this.props.store.user
-        
-    // })
-}
     render() {
         
         return (

@@ -15,7 +15,7 @@ const Nav = (props) => (
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login' if they are not */}
-        {props.store.user.id ? 'Home' : 'Login'}
+        {props.store.user.id ? 'Landing Page' : 'Login'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
       
@@ -54,6 +54,9 @@ const Nav = (props) => (
           </Link>
             </>
           )}
+          <Link className="nav-link" to="/change">
+            Change Password
+          </Link>
           <LogOutButton className="nav-link"/>
 
         </>

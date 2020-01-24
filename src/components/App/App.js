@@ -36,8 +36,8 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            {/* Visiting localhost:3000 will redirect to localhost:3000/login */}
+            <Redirect exact from="/" to="/login" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route
@@ -115,11 +115,11 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
+            {/* <ProtectedRoute
               exact
               path="/info"
               component={InfoPage}
-            />
+            /> */}
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will be redirected to the authRedirect path provided. */}
             <ProtectedRoute
@@ -128,12 +128,6 @@ class App extends Component {
               authRedirect="/admin"
               component={LoginPage}
             />
-            {/* <ProtectedRoute
-              exact
-              path="/registration"
-              authRedirect="/admin"
-              component={RegisterPage}
-            /> */}
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
