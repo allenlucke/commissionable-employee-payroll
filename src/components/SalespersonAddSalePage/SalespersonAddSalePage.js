@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-// console.log(this.props.store.user)
 class SalespersonAddSalePage extends Component {
     state = {
         heading: 'Salesperson Add Sale Page',
@@ -16,8 +15,8 @@ class SalespersonAddSalePage extends Component {
     };
     handleInputChange = (event, inputKey) => {
         this.setState({
-            newEmployee: {
-                ...this.state.newEmployee,
+            newSale: {
+                ...this.state.newSale,
                 [inputKey]: event.target.value
             }
         });
@@ -25,16 +24,16 @@ class SalespersonAddSalePage extends Component {
     addNewEmployee = (event, inputKey) => {
         const saleToAdd = this.state.newSale;
         const userInfo = this.props.store.user;
-        const userSecurityLevel = userInfo.securityLevel;
+        const userSecLvl = userInfo.securityLevel;
         const userID = userInfo.id;
         const newSaleDataForServer = {
             ...saleToAdd,
-            userSecurityLevel: userSecurityLevel,
+            userSecLvl: userSecLvl,
             userID: userID
         }
         event.preventDefault();
         this.props.dispatch({
-            type: 'ADD_EMPLOYEE',
+            type: 'ADD_SALE',
             payload: newSaleDataForServer              
         })
             this.setState({
@@ -59,7 +58,7 @@ class SalespersonAddSalePage extends Component {
                     onChange={(event) => this.handleInputChange(event, 'transactionNumber')} />
                     <input type='text' placeholder='Date' value={this.state.newSale.date}
                     onChange={(event) => this.handleInputChange(event, 'date')} />
-                    <input type='submit' value='Add Sale' />
+                    <input type='submit' value='Submit' />
                 </form>
             </div>
         );

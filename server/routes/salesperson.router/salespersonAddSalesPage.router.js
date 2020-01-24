@@ -7,9 +7,10 @@ const { rejectUnauthenticated } = require('./../../modules/authentication-middle
 
 // Post Route for Salesperson Add Sales Page
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const userSecLvl = req.body.userSecurityLevel;
+    console.log(req.body);
+    const userSecLvl = req.body.userSecLvl;
     const userID = req.body.userID;
-    const bonusTier = req.body.bonusTier;
+    // const bonusTier = req.body.bonusTier;
     const date = req.body.date;
     const transactionNumber = req.body.transactionNumber;
     const product_id = req.body.product_id;
