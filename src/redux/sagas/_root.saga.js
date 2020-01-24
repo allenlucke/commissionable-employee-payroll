@@ -1,17 +1,17 @@
 import { all } from 'redux-saga/effects';
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
-import changePasswordSaga from './changePassword.saga';
-import getAdminAllSalesSaga from './getAdminAllSales.saga';
-import getAdminTotalTeamSalesSaga from './getAdminTotalTeamSales.saga';
-import getAdminRosterSaga from './getAdminRoster.saga';
-import getAdminSalesByEmpSaga from './getAdminSalesByEmp.saga';
-import addEmployeeSaga from './addEmployee.saga';
-import deleteAdminRosterSaga from './deleteAdminRoster.saga ';
-import getSalespersonHomePageSaga from './getSalespersonHomePage.saga';
-import addSaleSaga from './addSale.saga';
-import getSalespersonViewSalesSaga from './getSalespersonViewSales.saga';
+import loginSaga from './userSagas/login.saga';
+import registrationSaga from './userSagas/registration.saga';
+import userSaga from './userSagas/user.saga';
+import changePasswordSaga from './userSagas/changePassword.saga';
+import getAdminAllSalesSaga from './adminSagas/getAdminAllSales.saga';
+import getAdminTotalTeamSalesSaga from './adminSagas/getAdminTotalTeamSales.saga';
+import getAdminRosterSaga from './adminSagas/getAdminRoster.saga';
+import getAdminSalesByEmpSaga from './adminSagas/getAdminSalesByEmp.saga';
+import addEmployeeSaga from './adminSagas/addEmployee.saga';
+import deleteAdminRosterSaga from './adminSagas/deleteAdminRoster.saga ';
+import getSalespersonHomePageSaga from './salespersonSagas/getSalespersonHomePage.saga';
+import addSaleSaga from './salespersonSagas/addSale.saga';
+import getSalespersonViewSalesSaga from './salespersonSagas/getSalespersonViewSales.saga';
 
 
 // rootSaga is the primary saga.

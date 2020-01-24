@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import loginMode from './loginMode.reducer';
 import user from './user.reducer';
-import getAdminAllSalesReducer from './getAdminAllSales.reducer';
-import getAdminTotalTeamSalesReducer from './getAdminTotalTeamSales.reducer';
-import getAdminSalesByEmpReducer from './getAdminSalesByEmp.reducer';
-import getAdminRosterReducer from './getAdminRoster.reducer';
-import getSalespersonHomePageReducer from './getSalespersonHomePage.reducer';
-import getSalespersonViewSalesReducer from './getSalespersonViewSales.reducer';
+import getAdminAllSalesReducer from './adminReducers/getAdminAllSales.reducer';
+import getAdminTotalTeamSalesReducer from './adminReducers/getAdminTotalTeamSales.reducer';
+import getAdminSalesByEmpReducer from './adminReducers/getAdminSalesByEmp.reducer';
+import getAdminRosterReducer from './adminReducers/getAdminRoster.reducer';
+import getSalespersonHomePageReducer from './salespersonReducers/getSalespersonHomePage.reducer';
+import getSalespersonViewSalesReducer from './salespersonReducers/getSalespersonViewSales.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
