@@ -59,6 +59,9 @@ const Nav = (props) => (
             <Link className="nav-link" to="/managerHomePage">
             Manager Home Page
             </Link>
+            <Link className="nav-link" to="/managerAllSales">
+            Manager All Sales Page
+            </Link>
             </>
           )}
           <Link className="nav-link" to="/change">

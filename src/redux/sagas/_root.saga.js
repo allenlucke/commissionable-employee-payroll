@@ -13,7 +13,7 @@ import getSalespersonHomePageSaga from './salespersonSagas/getSalespersonHomePag
 import addSaleSaga from './salespersonSagas/addSale.saga';
 import getSalespersonViewSalesSaga from './salespersonSagas/getSalespersonViewSales.saga';
 import getManagerHomePageSaga from './managerSagas/getManagerHomePage.saga';
-
+import getManagerAllSalesSaga from './managerSagas/getManagerAllSales.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -38,5 +38,6 @@ export default function* rootSaga() {
     addSaleSaga(),
     getSalespersonViewSalesSaga(),
     getManagerHomePageSaga(),
+    getManagerAllSalesSaga(),
   ]);
 }
