@@ -15,10 +15,10 @@ class ManagerTeamSalesPage extends Component {
             type: 'GET_MANAGER_SALES_BY_EMPLOYEE',
             payload: this.props.store.user
         })
-        //     this.props.dispatch({
-        //     type: 'GET_MANAGER_TOTAL_TEAM_SALES',
-        //     payload: this.props.store.user
-        // })
+            this.props.dispatch({
+            type: 'GET_MANAGER_TOTAL_TEAM_SALES',
+            payload: this.props.store.user
+        })
     }
 
     render() {
@@ -48,32 +48,32 @@ class ManagerTeamSalesPage extends Component {
                 </tr>
         )
         })
-        // const totalTeamSalesList = this.props.store.getManagerTotalTeamSalesReducer.map((item, index) => {
-        //     const productsSoldList = item.products;
-        //     const productId1QuantityList = productsSoldList.filter((item) => {
-        //         return item.productID === 1;
-        //     });
-        //     const productId2QuantityList = productsSoldList.filter((item) => {
-        //         return item.productID === 2;
-        //     });
-        //     const productId3QuantityList = productsSoldList.filter((item) => {
-        //         return item.productID === 3;
-        //     });
-        //     return(
-        //                     <tr key={index}>
-        //                         <td>{item.team_id}</td>
-        //                         <td>{item.teamName}</td>
-        //                         <td>{item.lastName}</td>
-        //                         <td>{item.avgTier}</td>
-        //                         <td>{productId1QuantityList.length > 0 ? productId1QuantityList[0].productsSold : 0}</td>
-        //                         <td>{productId2QuantityList.length > 0 ? productId2QuantityList[0].productsSold : 0}</td>
-        //                         <td>{productId3QuantityList.length > 0 ? productId3QuantityList[0].productsSold : 0}</td>
-        //                         <td>{item.productsSoldPerTeam}</td>
-        //                         <td>{item.salesPerTeam}</td>
-        //                         <td>{item.totalTeamCommissions}</td>
-        //                     </tr>
-        //             )
-        // })
+        const totalTeamSalesList = this.props.store.getManagerTotalTeamSalesReducer.map((item, index) => {
+            const productsSoldList = item.products;
+            const productId1QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 1;
+            });
+            const productId2QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 2;
+            });
+            const productId3QuantityList = productsSoldList.filter((item) => {
+                return item.productID === 3;
+            });
+            return(
+                            <tr key={index}>
+                                <td>{item.team_id}</td>
+                                <td>{item.teamName}</td>
+                                <td>{item.lastName}</td>
+                                <td>{item.avgTier}</td>
+                                <td>{productId1QuantityList.length > 0 ? productId1QuantityList[0].productsSold : 0}</td>
+                                <td>{productId2QuantityList.length > 0 ? productId2QuantityList[0].productsSold : 0}</td>
+                                <td>{productId3QuantityList.length > 0 ? productId3QuantityList[0].productsSold : 0}</td>
+                                <td>{item.productsSoldPerTeam}</td>
+                                <td>{item.salesPerTeam}</td>
+                                <td>{item.totalTeamCommissions}</td>
+                            </tr>
+                    )
+        })
         return (
             <div>
                 
@@ -97,7 +97,7 @@ class ManagerTeamSalesPage extends Component {
                             {salesByEmpList}
                     </tbody>    
                 </table>
-                {/* <h3>{this.state.heading3}</h3>
+                <h3>{this.state.heading3}</h3>
                 <table>
                     <thead>
                         <tr>
@@ -116,7 +116,7 @@ class ManagerTeamSalesPage extends Component {
                     <tbody>
                             {totalTeamSalesList}
                     </tbody>    
-                </table> */}
+                </table>
             </div>
         );
     }
