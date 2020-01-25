@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../../redux/mapStoreToProps';
 
 
-class SalespersonViewSalesPage extends Component {
+// console.log(this.props.store.user)
+class AdminAllSalesPage extends Component {
     state = {
-        heading: 'Salesperson View Sales Page',
+        heading: 'Admin All Sales Page',
     };
     
     componentDidMount() {
             this.props.dispatch({
-            type: 'GET_SALESPERSON_ALL_SALES',
+            type: 'GET_ADMIN_ALL_SALES',
             payload: this.props.store.user
         })
     }
 
     render() {
-        const allSalesList = this.props.store.getSalespersonViewSalesReducer.map((item, index) => {
+        const allSalesList = this.props.store.getAdminAllSalesReducer.map((item, index) => {
             return(
                 <tbody key={index}>
                     <tr>
+                        <td>{item.empid}</td>
+                        <td>{item.team_id}</td>
+                        <td>{item.lastName}</td>
+                        <td>{item.bonusTier}</td>
                         <td>{item.transactionNumber}</td>
                         <td>{item.salesID}</td>
                         <td>{item.orderDate}</td>
@@ -28,7 +33,7 @@ class SalespersonViewSalesPage extends Component {
                         <td>{item.costPerUnit}</td>
                         <td>{item.pricePerUnit}</td>
                         <td>{item.extendedPrice}</td>
-                        <td>{item.estCommission}</td>
+                        <td>{item.commission}</td>
                     </tr>
                 </tbody>
             )
@@ -40,6 +45,10 @@ class SalespersonViewSalesPage extends Component {
                 <table>
                     <thead>
                         <tr>
+                            <th>Employee ID</th>
+                            <th>Team ID</th>
+                            <th>Employee Last Name</th>
+                            <th>Employee Tier</th>
                             <th>Transaction Number</th>
                             <th>Order ID</th>
                             <th>Order Date</th>
@@ -58,4 +67,4 @@ class SalespersonViewSalesPage extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(SalespersonViewSalesPage);
+export default connect(mapStoreToProps)(AdminAllSalesPage);

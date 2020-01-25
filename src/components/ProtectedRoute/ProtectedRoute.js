@@ -4,7 +4,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import {connect} from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
+import LoginPage from '../LoginPages/LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 

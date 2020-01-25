@@ -13,16 +13,16 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 // import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
-import AdminHomePage from '../AdminHomePage/AdminHomePage';
-import AdminAllSalesPage from '../AdminAllSalesPage/AdminAllSalesPage';
-import AdminTeamSalesPage from '../AdminTeamSalesPage/AdminTeamSalesPage';
-import AdminRosterPage from '../AdminRosterPage/AdminRosterPage';
-import AdminAddEmployeePage from '../AdminAddEmployeePage/AdminAddEmployeePage';
-import SalespersonHomePage from '../SalespersonHomePage/SalespersonHomePage';
-import SalespersonAddSalePage from '../SalespersonAddSalePage/SalespersonAddSalePage';
-import SalespersonViewSalesPage from '../SalespersonViewSalesPage/SalespersonViewSalesPage';
+import LoginPage from '../LoginPages/LoginPage/LoginPage';
+import ChangePasswordPage from '../LoginPages/ChangePasswordPage/ChangePasswordPage';
+import AdminHomePage from '../AdminPages/AdminHomePage/AdminHomePage';
+import AdminAllSalesPage from '../AdminPages/AdminAllSalesPage/AdminAllSalesPage';
+import AdminTeamSalesPage from '../AdminPages/AdminTeamSalesPage/AdminTeamSalesPage';
+import AdminRosterPage from '../AdminPages/AdminRosterPage/AdminRosterPage';
+import AdminAddEmployeePage from '../AdminPages/AdminAddEmployeePage/AdminAddEmployeePage';
+import SalespersonHomePage from '../SalespersonPages/SalespersonHomePage/SalespersonHomePage';
+import SalespersonAddSalePage from '../SalespersonPages/SalespersonAddSalePage/SalespersonAddSalePage';
+import SalespersonViewSalesPage from '../SalespersonPages/SalespersonViewSalesPage/SalespersonViewSalesPage';
 import './App.css';
 
 class App extends Component {

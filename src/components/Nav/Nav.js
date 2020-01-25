@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButton from '../LoginPages/LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
@@ -41,7 +41,7 @@ const Nav = (props) => (
           </Link>
           </>
           )}
-          {props.store.user.securityLevel  <= 5 && (
+          {props.store.user.securityLevel  <= 4 && (
             <>
           <Link className="nav-link" to="/salespersonHomePage">
             Salesperson Home Page

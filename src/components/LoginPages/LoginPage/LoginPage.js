@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../../redux/mapStoreToProps';
 
-class ChangePasswordPage extends Component {
+class LoginPage extends Component {
   state = {
     username: '',
     password: '',
-    confirmedPassword: '',
+    userSecurityLevel: '',
   };
 
-  changePassword = (event) => {
+  login = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password === this.state.confirmedPassword) {
+    if (this.state.username && this.state.password) {
       this.props.dispatch({
-        type: 'CHANGE_PASSWORD',
+        type: 'LOGIN',
         payload: {
           username: this.state.username,
           password: this.state.password,
+          userSecurityLevel: this.state.userSecurityLevel,
         },
       });
-      this.props.history.push('/login');
     } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  } // end registerUser
+      this.props.history.push('/home');
+  } // end login
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -35,16 +36,16 @@ class ChangePasswordPage extends Component {
   render() {
     return (
       <div>
-        {this.props.errors.registrationMessage && (
+        {this.props.store.errors.loginMessage && (
           <h2
             className="alert"
             role="alert"
           >
-            {this.props.errors.registrationMessage}
+            {this.props.store.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.changePassword}>
-          <h1>Change Password</h1>
+        <form onSubmit={this.login}>
+          <h1>Login</h1>
           <div>
             <label htmlFor="username">
               Username:
@@ -68,22 +69,11 @@ class ChangePasswordPage extends Component {
             </label>
           </div>
           <div>
-            <label htmlFor="confirmedPassword">
-              Password:
-              <input
-                type="password"
-                name="confirmedPassword"
-                value={this.state.confirmedPassword}
-                onChange={this.handleInputChangeFor('confirmedPassword')}
-              />
-            </label>
-          </div>
-          <div>
             <input
-              className="register"
+              className="log-in"
               type="submit"
               name="submit"
-              value="Submit"
+              value="Log In"
             />
           </div>
         </form>
@@ -92,5 +82,4 @@ class ChangePasswordPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(ChangePasswordPage);
-
+export default connect(mapStoreToProps)(LoginPage);
