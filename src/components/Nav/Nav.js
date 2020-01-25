@@ -61,6 +61,9 @@ const Nav = (props) => (
             </Link>
             <Link className="nav-link" to="/managerAllSales">
             Manager All Sales Page
+            </Link>            
+            <Link className="nav-link" to="/managerTeamSales">
+            Manager Team Sales Page
             </Link>
             </>
           )}

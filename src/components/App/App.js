@@ -28,6 +28,7 @@ import SalespersonViewSalesPage from '../SalespersonPages/SalespersonViewSalesPa
 //Manager Pages
 import ManagerHomePage from '../ManagerPages/ManagerHomePage/ManagerHomePage';
 import ManagerAllSalesPage from '../ManagerPages/ManagerAllSalesPage/ManagerAllSalesPage';
+import ManagerTeamSalesPage from '../ManagerPages/ManagerTeamSalesPage/ManagerTeamSalesPage';
 import './App.css';
 
 class App extends Component {
@@ -109,6 +110,11 @@ class App extends Component {
               exact
               path="/managerAllSales"
               component={ManagerAllSalesPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/managerTeamSales"
+              component={ManagerTeamSalesPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
