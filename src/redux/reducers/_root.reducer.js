@@ -11,6 +11,7 @@ import getSalespersonViewSalesReducer from './salespersonReducers/getSalesperson
 import getManagerHomePageReducer from './managerReducers/getManagerHomePage.reducer';
 import getManagerAllSalesReducer from './managerReducers/getManagerAllSales.reducer';
 import getManagerSalesByEmpReducer from './managerReducers/getManagerSalesByEmp.reducer';
+import getManagerTotalTeamSalesReducer from './managerReducers/getManagerTotalTeamSales.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   getManagerHomePageReducer,
   getManagerAllSalesReducer,
   getManagerSalesByEmpReducer,
+  getManagerTotalTeamSalesReducer,
 });
 
 export default rootReducer;
