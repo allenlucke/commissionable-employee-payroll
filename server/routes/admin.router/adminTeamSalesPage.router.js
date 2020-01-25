@@ -104,7 +104,7 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
     ORDER BY "employees".id;`;
     if (userSecLvl >= 10 ) {
     pool.query(queryString)
-    .then((responseEmpWithTotSales) => {
+    .then((responseEmpWithTotalSales) => {
         //Querystring for total sales by employee by product
         const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", 
         "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
@@ -115,12 +115,12 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
         ORDER BY "employees".id ASC;`;
         pool.query(queryString)
         .then((responseEmpSalesByProduct) => {
-            const empWithTotSales = responseEmpWithTotSales.rows;
+            const empWithTotalSales = responseEmpWithTotalSales.rows;
             const empSalesByProduct = responseEmpSalesByProduct.rows;
-            console.log(responseEmpWithTotSales.rows)
+            console.log(responseEmpWithTotalSales.rows)
             console.log(responseEmpSalesByProduct.rows);
 
-            const newEmpDataArray = empWithTotSales.map((empItem) => {
+            const newEmpDataArray = empWithTotalSales.map((empItem) => {
                 const empID = empItem.id;
                 // assumed that there will always be only one employee matching
                 const empMatchForSalesByProduct = empSalesByProduct.filter((item ) => {
