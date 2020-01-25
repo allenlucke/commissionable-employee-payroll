@@ -46,10 +46,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 //Get route for Sales By Employee - Manager Team Sales Page
-router.get('/empSales', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const teamsID = req.body.teamsID;
-    const userSecLvl = req.body.userSecurityLevel;
+router.get('/empSales/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.userID;
+    const teamsID = req.params.teamsID;
+    const userSecLvl = req.params.userSecLvl;
     //Querystring for total sales by employees   
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
 	JOIN "teams" ON "employees".team_id = "teams".id
@@ -61,7 +61,7 @@ router.get('/empSales', rejectUnauthenticated, (req, res) => {
     GROUP BY "employees".id`;
     if (userSecLvl >= 5 ) {
     pool.query(queryString)
-    .then((response1) => {
+    .then((responseEmpWithTotSales) => {
         //Querystring for total sales by employee by product
         const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
 		JOIN "teams" ON "employees".team_id = "teams".id
@@ -72,11 +72,30 @@ router.get('/empSales', rejectUnauthenticated, (req, res) => {
         GROUP BY "products"."productName", "products".id, "employees".id
         ORDER BY "employees".id ASC; `;
         pool.query(queryString)
-        .then((response2) => {
-            res.send({
-                salesByEmployee: response1.rows,
-                salesByProduct: response2.rows,
-            })
+        .then((responseEmpSalesByProduct) => {
+            const empWithTotSales = responseEmpWithTotSales.rows;
+            const empSalesByProduct = responseEmpSalesByProduct.rows;
+            console.log(responseEmpWithTotSales.rows)
+            console.log(responseEmpSalesByProduct.rows);
+
+            const newEmpDataArray = empWithTotSales.map((empItem) => {
+                const empID = empItem.id;
+                // assumed that there will always be only one employee matching
+                const empMatchForSalesByProduct = empSalesByProduct.filter((item ) => {
+                    return item.employeesID === empID;
+                });
+                const empData = {
+                    ...empItem,
+                    products: [
+                        ...empMatchForSalesByProduct
+                    ]
+                };
+                return empData;
+            });
+            
+            console.log('n---------------------n', newEmpDataArray);
+
+            res.send(newEmpDataArray)
         })    
         .catch((err) => {
             res.sendStatus(500);
