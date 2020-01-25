@@ -51,7 +51,10 @@ router.get('/empSales/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req
     const teamsID = req.params.teamsID;
     const userSecLvl = req.params.userSecLvl;
     //Querystring for total sales by employees   
-    const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+    const queryString = `SELECT "employees".id, "employees"."lastName", 
+    "employees"."bonusTier", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") 
+    AS "totalTeamCommissions", SUM("sales_products"."unitsSold") AS "productsSold", 
+    SUM("products"."pricePerUnit" * "sales_products"."unitsSold") AS "total_sales" FROM "employees"
 	JOIN "teams" ON "employees".team_id = "teams".id
     JOIN "sales" ON "employees".id = "sales".employees_id
     JOIN "sales_products" ON "sales".id = "sales_products".sales_id

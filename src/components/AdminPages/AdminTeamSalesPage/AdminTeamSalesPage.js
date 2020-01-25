@@ -79,9 +79,6 @@ class AdminTeamSalesPage extends Component {
             <div>
                 
                 <h2>{this.state.heading1}</h2>
-                {/* <h1>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer)}</h1> */}
-                {/* <h3>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamSalesTotal)}</h3>
-                <h3>${JSON.stringify(this.props.store.getAdminTotalTeamSalesReducer.teamIDIndividualProductsSold)}</h3> */}
                 <h3>{this.state.heading2}</h3>
                 <table>
                     <thead>
