@@ -8,6 +8,7 @@ import getAdminSalesByEmpReducer from './adminReducers/getAdminSalesByEmp.reduce
 import getAdminRosterReducer from './adminReducers/getAdminRoster.reducer';
 import getSalespersonHomePageReducer from './salespersonReducers/getSalespersonHomePage.reducer';
 import getSalespersonViewSalesReducer from './salespersonReducers/getSalespersonViewSales.reducer';
+import getManagerHomePageReducer from './managerReducers/getManagerHomePage.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   getAdminRosterReducer,
   getSalespersonHomePageReducer,
   getSalespersonViewSalesReducer,
+  getManagerHomePageReducer,
 });
 
 export default rootReducer;

@@ -14,12 +14,12 @@ class ManagerHomePage extends Component {
 
     componentDidMount() {
         this.props.dispatch({
-        type: 'GET_MANGER_HOMEPAGE',
+        type: 'GET_MANAGER_HOMEPAGE',
         payload: this.props.store.user 
     })
 }
     render() {
-        const teamName = this.props.store.getManagerPageReducer.map((item, index) => {
+        const teamName = this.props.store.getManagerHomePageReducer.map((item, index) => {
             console.log(item.teamName)
             return(
                 <div key={index}>
