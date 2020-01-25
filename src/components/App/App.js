@@ -57,61 +57,51 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/change"
-              // authRedirect="/admin"
               component={ChangePasswordPage}
             />
             <ProtectedRoute
               exact
               path="/adminHome"
-              // authRedirect="/admin"
               component={AdminHomePage}
             />
             <ProtectedRoute
               exact
               path="/adminAllSales"
-              // authRedirect="/admin"
               component={AdminAllSalesPage}
             />
             <ProtectedRoute
               exact
               path="/adminTeamSales"
-              // authRedirect="/admin"
               component={AdminTeamSalesPage}
             />
             <ProtectedRoute
               exact
               path="/adminRoster"
-              // authRedirect="/admin"
               component={AdminRosterPage}
             />
             <ProtectedRoute
               exact
               path="/adminAddEmp"
-              // authRedirect="/admin"
               component={AdminAddEmployeePage}
             />
             <ProtectedRoute
               exact
               path="/salespersonHomePage"
-              // authRedirect="/admin"
               component={SalespersonHomePage}
             />
             <ProtectedRoute
               exact
               path="/salespersonAddSalePage"
-              // authRedirect="/admin"
               component={SalespersonAddSalePage}
             />
             <ProtectedRoute
               exact
               path="/salespersonViewSalesPage"
-              // authRedirect="/admin"
               component={SalespersonViewSalesPage}
             />
             <ProtectedRoute
               exact
               path="/managerHomePage"
-              // authRedirect="/admin"
               component={ManagerHomePage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
