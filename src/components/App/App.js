@@ -15,14 +15,18 @@ import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPages/LoginPage/LoginPage';
 import ChangePasswordPage from '../LoginPages/ChangePasswordPage/ChangePasswordPage';
+//Admin Pages
 import AdminHomePage from '../AdminPages/AdminHomePage/AdminHomePage';
 import AdminAllSalesPage from '../AdminPages/AdminAllSalesPage/AdminAllSalesPage';
 import AdminTeamSalesPage from '../AdminPages/AdminTeamSalesPage/AdminTeamSalesPage';
 import AdminRosterPage from '../AdminPages/AdminRosterPage/AdminRosterPage';
 import AdminAddEmployeePage from '../AdminPages/AdminAddEmployeePage/AdminAddEmployeePage';
+//Salesperson Pages
 import SalespersonHomePage from '../SalespersonPages/SalespersonHomePage/SalespersonHomePage';
 import SalespersonAddSalePage from '../SalespersonPages/SalespersonAddSalePage/SalespersonAddSalePage';
 import SalespersonViewSalesPage from '../SalespersonPages/SalespersonViewSalesPage/SalespersonViewSalesPage';
+//Manager Pages
+import ManagerHomePage from '../ManagerPages/ManagerHomePage/ManagerHomePage';
 import './App.css';
 
 class App extends Component {
@@ -103,6 +107,12 @@ class App extends Component {
               path="/salespersonViewSalesPage"
               // authRedirect="/admin"
               component={SalespersonViewSalesPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/managerHomePage"
+              // authRedirect="/admin"
+              component={ManagerHomePage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.

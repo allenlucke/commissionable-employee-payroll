@@ -54,6 +54,13 @@ const Nav = (props) => (
           </Link>
             </>
           )}
+          {props.store.user.securityLevel = 5 && (
+            <>
+            <Link className="nav-link" to="/managerHomePage">
+            Manager Home Page
+            </Link>
+            </>
+          )}
           <Link className="nav-link" to="/change">
             Change Password
           </Link>
