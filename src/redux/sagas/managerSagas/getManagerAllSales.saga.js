@@ -5,10 +5,11 @@ function* getManagerAllSales(action) {
     console.log(action.payload);
     const id = action.payload.id;
     const secLvl = action.payload.securityLevel;
+    const teamsID = action.payload.team_id;
     try {
         const response = yield axios({
             method: 'GET',
-            url: '/api/manager/AllSales/' + secLvl + '/' + id, 
+            url: '/api/manager/AllSales/' + secLvl + '/' + id + '/' + teamsID, 
         })
         yield put({
             type: 'SET_MANAGER_ALL_SALES',

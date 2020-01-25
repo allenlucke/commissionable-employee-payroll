@@ -20,7 +20,7 @@ class ManagerAllSalesPage extends Component {
             return(
                 <tbody key={index}>
                     <tr>
-                        <td>{item.empid}</td>
+                        <td>{item.id}</td>
                         <td>{item.team_id}</td>
                         <td>{item.lastName}</td>
                         <td>{item.bonusTier}</td>
@@ -32,7 +32,7 @@ class ManagerAllSalesPage extends Component {
                         <td>{item.costPerUnit}</td>
                         <td>{item.pricePerUnit}</td>
                         <td>{item.extendedPrice}</td>
-                        <td>{item.commission}</td>
+                        <td>{item.estCommission}</td>
                     </tr>
                 </tbody>
             )

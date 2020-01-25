@@ -6,14 +6,16 @@ const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Manager All Sales Page
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const teamsID = req.body.teamsID;
-    const userSecLvl = req.body.userSecurityLevel;
+router.get('/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.userID;
+    const teamsID = req.params.teamsID;
+    const userSecLvl = req.params.userSecLvl;
     const queryString = `SELECT "employees".id, "employees"."lastName", "employees"."bonusTier", 
     "sales"."transactionNumber", "sales".id AS "salesID", "sales"."orderDate", 
     "products"."productName", "sales_products"."unitsSold",
     "products"."costPerUnit", "products"."pricePerUnit", 
+    "employees".team_id,
+    SUM("products"."pricePerUnit" * "sales_products"."unitsSold") AS "extendedPrice",
     SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") 
     AS "estCommission" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
