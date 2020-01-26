@@ -1,13 +1,15 @@
 ## Commissionable Payroll App
 
 ## Description
-Duration: Two-Week Sprint
+Duration: 2 Week Sprint
 
 The Commissionable Payroll App is a Single Page Application designed as a template for a business that employs salespeople who's wages are based in some part on a commission scale. The application does many things, but it's primary function is to provide an up-to-date status of each employees commissions as they move through various bonus tiers and modifiers( Example: A salesperson that sells 30 products is payed a greater percentage of their sales percentage that is higher than a salesperson that only sells 10. ).
 
 The App at present has three "Security Levels" of employees. Salesperson, Manager, and Admin. A salesperson may add new sales as well as view their own sales and commissions. A manager can view all the sales and commissions of all salespeople on their own team. An Admin can view the sales and commissions of all teams and employees. As well as add new employees and if need be terminate an employee.
 
 As this is designed to be an application for internal access to the application will only be granted to employees. New employees will automatically be sent their username and a starting password. Along with instructions to change their password upon initial login.
+
+*All passwords are encrypted*
 
 ## Prerequisites
 
@@ -55,26 +57,32 @@ This process can be a little tricky. However doing so will allow you to create A
 3. Don't forget to uncomment the code you commented out in step 1.
 ![](public/images/addEmp3.png)
 
-* Navigate to `localhost:3000`
 
-## Testing Routes with Postman
+## Usage ##
+## Login
+1. Login by using your username and password on the login screen.
+2. A user may change their password by visiting the change password link. It is advised that all new users immediately change their initially provided password to one of their own making.
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum. 
+*Admin*
+Admin level users have multiple links available to them and their options include the following:
+1. View all sales.
+2. View sales/commissions by team.
+3. View sales by employee
+4. View the employee Roster
+5. Add a new employee to the system.
+6. Terminate an employee. ( Provided they have no sales. future releases will utilize a legacy employee system to allow for termination of an employee w/o removing any vital employee or sales information.)
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
+*Manager*
+Manager level users have multiple links available to them and their options include the following:
+1. View all sales made by members of their team.
+2. View the total team sales/commissions of their team.
+3. View the cumulative sales/commissions of employees on their team.
 
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Passport. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-    1. `POST /api/user/register` registers a new user, see body to change username/password
-    2. `POST /api/user/login` will login a user, see body to change username/password
-    3. `GET /api/user` will get user information, by default it's not very much
+*Salesperson*
+Salesperson level users have multiple links available to them and their options include the following:
+1. View a list of all sales/commissions they have made.
+2. Add a new sale.
 
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Screenshots
-
-## Usage
 
 ## Built with
 Node, Express, Javascript, PostgreSQL, React, Redux, Nodemailer, html, CSS, Logger, Body-Parser A full list of dependencies can be found in `package.json`.
