@@ -63,7 +63,6 @@ This process can be a little tricky. However doing so will allow you to create A
 1. Login by using your username and password on the login screen.
 2. A user may change their password by visiting the change password link. It is advised that all new users immediately change their initially provided password to one of their own making.
 
-*Admin*
 Admin level users have multiple links available to them and their options include the following:
 1. View all sales.
 2. View sales/commissions by team.
@@ -72,13 +71,11 @@ Admin level users have multiple links available to them and their options includ
 5. Add a new employee to the system.
 6. Terminate an employee. ( Provided they have no sales. future releases will utilize a legacy employee system to allow for termination of an employee w/o removing any vital employee or sales information.)
 
-*Manager*
 Manager level users have multiple links available to them and their options include the following:
 1. View all sales made by members of their team.
 2. View the total team sales/commissions of their team.
 3. View the cumulative sales/commissions of employees on their team.
 
-*Salesperson*
 Salesperson level users have multiple links available to them and their options include the following:
 1. View a list of all sales/commissions they have made.
 2. Add a new sale.
