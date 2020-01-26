@@ -18,12 +18,25 @@ Before you get started, make sure you have the following software installed on y
 - [Nodemon](https://nodemon.io/)
 
 ## Installation
+1. Fork or Clone the repo from github.
+2. Run 'NPM install' in the terminal to install all dependencies.
+3. Create a `.env` file at the root of the project ( See `.env` File Setup ).
+4. See Create database and table to create your database.
+5. Run 'NPM run server' in the terminal.
+6. See Creating Admin User to create and admin account.
+7. Open a second terminal and run 'NPM run client'.
+8. Navigate to `localhost:3000` and login with you admin username and password.
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
+## `.env File Setup
+In the `.env` file you will need the following lines fo code for nodemailer to access you gmail account.
 
+    `USERNAME=yourEmail@gmail.com
+     PASSWORD=yourPassword
+     FROM=yourEmail@gmail.com`
 
+Replace `yourEmail` with your email address and `yourPassword` with your email password.
+Visit https://myaccount.google.com/lesssecureapps and click Allow less secure apps: ON.
+This will allow the nodemailer feature access to your email so you can send username and passwords to your new employees.
 
 ## Create database and table
 
@@ -31,29 +44,18 @@ Create a new database called `commission_app` and run the queries from the `data
 
 If you would like to name your database something else, you will need to change `commission_app` to the name of your new database name in `server/modules/pool.js`
 
-## Development Setup Instructions
+## Creating Admin User
+This process can be a little tricky. However doing so will allow you to create Admin access to the app which you will need to utilize the app and grant access to your employees as well.
 
-* Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
-    ```
-    SERVER_SESSION_SECRET=superDuperSecret
-    ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm run server`
-* Run `npm run client`
+1. Got to the adminAddEmployeePage.router at `server/routes/admin.router/adminAddEmployeePage.router`. And comment out the code in the screenshot. Doing so will allow you to bypass the initial security checks to create your Admin account.
+![](public/images/addEmp1.png)
+
+2. Go to Postman and run the route in the screenshot. Name the user etc. whatever you like, but be sure to use your own email address and set the securityLevel to 10 or above.
+![](public/images/addEmp2.png)
+3. Don't forget to uncomment the code you commented out in step 1.
+![](public/images/addEmp3.png)
+
 * Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
 
 ## Testing Routes with Postman
 
@@ -69,8 +71,6 @@ Keep in mind that once you using the login route, Postman will manage your sessi
     3. `GET /api/user` will get user information, by default it's not very much
 
 After running the login route above, you can try any other route you've created that requires a logged in user!
-
-
 
 ## Screenshots
 
