@@ -103,8 +103,8 @@ class ManagerTeamSalesPage extends Component {
                         <tr>
                             <th>Team ID</th>
                             <th>Team Name</th>
-                            <th>Manager Last</th>
-                            <th>Average Tier</th>
+                            <th>Manager Last Name</th>
+                            <th>Avg Tier</th>
                             <th>Product1</th>
                             <th>Product2</th>
                             <th>Product3</th>

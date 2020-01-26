@@ -6,44 +6,84 @@ const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
 
 //Get route for Total Team Sales - Manager Team Page
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const userID = req.body.userID;
-    const teamsID = req.body.teamsID;
-    const userSecLvl = req.body.userSecurityLevel;
-    //Querystring for total products sold and total sales by team
-    const queryString = `SELECT SUM("sales_products"."unitsSold") AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit") AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold") AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier" FROM "employees"
+router.get('/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req, res) => {
+    const userID = req.params.userID;
+    const teamsID = req.params.teamsID;
+    const userSecLvl = req.params.userSecLvl;
+    //Querystring for manger/teamNames
+    const queryString = `SELECT "employees"."lastName","employees".team_id, "teams"."teamName" FROM "employees"
     JOIN "teams" ON "employees".team_id = "teams".id
-    JOIN "sales" ON "employees".id = "sales".employees_id
-    JOIN "sales_products" ON "sales".id = "sales_products".sales_id
-    JOIN "products" ON "sales_products".product_id = "products".id
-    JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
-    WHERE "teams".id = ${teamsID}`;
+    WHERE "employees".id = ${userID}
+    ORDER BY "teams".id ASC;`;
     if (userSecLvl >= 5 ) {
-    pool.query(queryString)
-    .then((response1) => {
-        //Querystring for amount of individual products sold by team
-        const queryString = `SELECT "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
-        JOIN "teams" ON "employees".team_id = "teams".id
-        JOIN "sales" ON "employees".id = "sales".employees_id
-        JOIN "sales_products" ON "sales".id = "sales_products".sales_id
-        JOIN "products" ON "sales_products".product_id = "products".id
-        WHERE "teams".id = ${teamsID}
-        GROUP BY "products"."productName", "products".id;`;
         pool.query(queryString)
-        .then((response2) => {
-            res.send({
-                teamSalesTotal: response1.rows,
-                teamIndividualProductsSold: response2.rows,
+            .then((responseTeamWithManager) => {
+                //Querystring for total products sold and total sales per team
+                const queryString = `SELECT SUM("sales_products"."unitsSold")
+                AS "productsSoldPerTeam", SUM("sales_products"."unitsSold"* "products"."pricePerUnit")
+                AS "salesPerTeam", SUM("bonusTier".modifier * "products"."pricePerUnit" * "sales_products"."unitsSold")
+                AS "totalTeamCommissions", AVG("employees"."bonusTier") AS "avgTier", "teams"."id" as "team_id" FROM "employees"
+                JOIN "teams" ON "employees".team_id = "teams".id
+                JOIN "sales" ON "employees".id = "sales".employees_id
+                JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+                JOIN "products" ON "sales_products".product_id = "products".id
+                JOIN "bonusTier" ON "employees"."bonusTier" = "bonusTier".id
+                WHERE "teams".id = ${teamsID}
+                GROUP BY "teams".id
+                ORDER BY "teams".id ASC;`;
+                pool.query(queryString)
+                .then((responseTotalProductSold) => {
+                    //Querystring for amount of products sold by individual teams
+                    const queryString = `SELECT "teams".id AS "teamID", "products"."productName", "products".id
+                    AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+                    JOIN "teams" ON "employees".team_id = "teams".id
+                    JOIN "sales" ON "employees".id = "sales".employees_id
+                    JOIN "sales_products" ON "sales".id = "sales_products".sales_id
+                    JOIN "products" ON "sales_products".product_id = "products".id
+                    WHERE "teams".id = ${teamsID}
+                    GROUP BY "teams".id, "products"."productName", "products".id
+                    ORDER BY "teams".id ASC;`;
+                    pool.query(queryString)
+                    .then((responseTeamProducts) => {
+                        const teamsWithManager = responseTeamWithManager.rows;
+                        const teamsTotalProductsSold = responseTotalProductSold.rows;
+                        const teamsProductsSold = responseTeamProducts.rows;
+
+                        const newTeamsDataArray = teamsWithManager.map((teamItem) => {
+                            const teamId = teamItem.team_id;
+                            // assumed that there will always be only one team matching
+                            const teamMatchForTotalProducts = teamsTotalProductsSold.filter((item) => {
+                                return item.team_id === teamId;
+                            });
+                            const teamMatchForProductsSold = teamsProductsSold.filter((item) => {
+                                return item.teamID === teamId;
+                            });
+                            const teamData = {
+                                ...teamItem,
+                                ...teamMatchForTotalProducts[0],
+                                products: [
+                                    ...teamMatchForProductsSold
+                                ]
+                            };
+                            return teamData;
+                        });
+                        
+                        res.send(newTeamsDataArray);
+                    })   
+                    .catch((err) => {
+                        res.sendStatus(500);
+                    })
+                })   
+                .catch((err) => {
+                    res.sendStatus(500);
+                })
+            })   
+            .catch((err) => {
+                res.sendStatus(500);
             })
-        })
-        .catch((err) => {
-            res.sendStatus(500);
-        })
-    })
-    .catch((err) => {
-        res.sendStatus(500);
-    })}
+    }
 });
+
 
 //Get route for Sales By Employee - Manager Team Sales Page
 router.get('/empSales/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req, res) => {
@@ -66,20 +106,20 @@ router.get('/empSales/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req
     pool.query(queryString)
     .then((responseEmpWithTotalSales) => {
         //Querystring for total sales by employee by product
-        const queryString = `SELECT "employees".id AS "employeesID", "products"."productName", "products".id AS "productID", SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
+        const queryString = `SELECT "employees".id AS "employeesID", 
+        "products"."productName", "products".id AS "productID", 
+        SUM("sales_products"."unitsSold") AS "productsSold" FROM "employees"
 		JOIN "teams" ON "employees".team_id = "teams".id
         JOIN "sales" ON "employees".id = "sales".employees_id
         JOIN "sales_products" ON "sales".id = "sales_products".sales_id
         JOIN "products" ON "sales_products".product_id = "products".id
         WHERE "teams".id = ${teamsID}
         GROUP BY "products"."productName", "products".id, "employees".id
-        ORDER BY "employees".id ASC; `;
+        ORDER BY "employees".id ASC;`;
         pool.query(queryString)
         .then((responseEmpSalesByProduct) => {
             const empWithTotalSales = responseEmpWithTotalSales.rows;
             const empSalesByProduct = responseEmpSalesByProduct.rows;
-            console.log(responseEmpWithTotalSales.rows)
-            console.log(responseEmpSalesByProduct.rows);
 
             const newEmpDataArray = empWithTotalSales.map((empItem) => {
                 const empID = empItem.id;
@@ -95,9 +135,6 @@ router.get('/empSales/:userSecLvl/:userID/:teamsID', rejectUnauthenticated, (req
                 };
                 return empData;
             });
-
-            console.log('n---------------------n', newEmpDataArray);
-
             res.send(newEmpDataArray)
         })    
         .catch((err) => {
