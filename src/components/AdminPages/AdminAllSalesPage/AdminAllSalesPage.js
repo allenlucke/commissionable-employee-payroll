@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
+import moment from 'moment';
+import currencyFormatter from 'currency-formatter';
 
 
 // console.log(this.props.store.user)
@@ -27,13 +29,13 @@ class AdminAllSalesPage extends Component {
                         <td>{item.bonusTier}</td>
                         <td>{item.transactionNumber}</td>
                         <td>{item.salesID}</td>
-                        <td>{item.orderDate}</td>
+                        <td>{moment(item.orderDate).format('LL')}</td>
                         <td>{item.productName}</td>
                         <td>{item.unitsSold}</td>
-                        <td>{item.costPerUnit}</td>
-                        <td>{item.pricePerUnit}</td>
-                        <td>{item.extendedPrice}</td>
-                        <td>{item.commission}</td>
+                        <td>${item.costPerUnit}</td>
+                        <td>${item.pricePerUnit}</td>
+                        <td>${item.extendedPrice}</td>
+                        <td>${currencyFormatter.format(item.commission, 'USD')}</td>
                     </tr>
                 </tbody>
             )

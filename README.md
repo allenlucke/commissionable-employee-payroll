@@ -49,7 +49,7 @@ If you would like to name your database something else, you will need to change 
 ## Creating Admin User
 This process can be a little tricky. However doing so will allow you to create Admin access to the app which you will need to utilize the app and grant access to your employees as well.
 
-1. Got to the adminAddEmployeePage.router at `server/routes/admin.router/adminAddEmployeePage.router`. And comment out the code in the screenshot. Doing so will allow you to bypass the initial security checks to create your Admin account.
+1. Go to the adminAddEmployeePage.router at `server/routes/admin.router/adminAddEmployeePage.router`. And comment out the code in the screenshot. Doing so will allow you to bypass the initial security checks to create your Admin account.
 ![](public/images/addEmp1.png)
 
 2. Go to Postman and run the route in the screenshot. Name the user etc. whatever you like, but be sure to use your own email address and set the securityLevel to 10 or above.

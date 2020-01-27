@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-
+import moment from 'moment';
+import currencyFormatter from 'currency-formatter';
 
 class AdminRosterPage extends Component {
     state = {
@@ -45,8 +46,8 @@ class AdminRosterPage extends Component {
                         <td>{item.lastName}</td>
                         <td>{item.position}</td>
                         <td>{item.securityLevel}</td>
-                        <td>{item.hireDate}</td>
-                        <td>{item.baseSalary}</td>
+                        <td>{moment(item.hireDate).format('LL')}</td>
+                        <td>${item.baseSalary}</td>
                         <td>{item.bonusTier}</td>
                         <td>{item.team_id}</td>
                         <td>{item.teamName}</td>                
