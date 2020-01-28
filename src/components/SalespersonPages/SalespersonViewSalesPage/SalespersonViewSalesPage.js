@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-
+import moment from 'moment';
+import currencyFormatter from 'currency-formatter';
 
 class SalespersonViewSalesPage extends Component {
     state = {
@@ -22,13 +23,13 @@ class SalespersonViewSalesPage extends Component {
                     <tr>
                         <td>{item.transactionNumber}</td>
                         <td>{item.salesID}</td>
-                        <td>{item.orderDate}</td>
+                        <td>{moment(item.orderDate).format('LL')}</td>
                         <td>{item.productName}</td>
                         <td>{item.unitsSold}</td>
-                        <td>{item.costPerUnit}</td>
-                        <td>{item.pricePerUnit}</td>
-                        <td>{item.extendedPrice}</td>
-                        <td>{item.estCommission}</td>
+                        <td>${item.costPerUnit}</td>
+                        <td>${item.pricePerUnit}</td>
+                        <td>${item.extendedPrice}</td>
+                        <td>${currencyFormatter.format(item.estCommission, 'USD')}</td>
                     </tr>
                 </tbody>
             )
