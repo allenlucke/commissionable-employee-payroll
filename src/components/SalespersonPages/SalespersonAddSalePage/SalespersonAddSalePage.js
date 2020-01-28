@@ -47,7 +47,7 @@ class SalespersonAddSalePage extends Component {
         }
     render() {
         return (
-            <div>
+            <div className= "container">
                 <h2>{this.state.heading}</h2>
                 <form onSubmit={this.addNewEmployee}>
                     <select onChange={(event) => this.handleInputChange(event, this.state.newSale.product_id = event.target.value )}>

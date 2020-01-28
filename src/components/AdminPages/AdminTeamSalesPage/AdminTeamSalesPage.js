@@ -76,7 +76,7 @@ class AdminTeamSalesPage extends Component {
         )
         })
         return (
-            <div>
+            <div className= "container">
                 
                 <h2>{this.state.heading1}</h2>
                 <h3>{this.state.heading2}</h3>

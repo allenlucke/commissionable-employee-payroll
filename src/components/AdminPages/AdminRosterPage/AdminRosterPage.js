@@ -57,7 +57,7 @@ class AdminRosterPage extends Component {
             )
         })
         return (
-            <div>
+            <div className= "container">
                 
                 <h2>{this.state.heading}</h2>
                 <table>

@@ -34,7 +34,7 @@ class ChangePasswordPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className= "container">
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"

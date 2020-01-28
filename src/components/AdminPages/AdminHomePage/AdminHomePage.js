@@ -15,7 +15,7 @@ class AdminHomePage extends Component {
     render() {
         
         return (
-            <div>
+            <div className= "container">
                 <h2>{this.state.heading}</h2>
 
                 <p>Hello, {this.props.store.user.firstName}</p>

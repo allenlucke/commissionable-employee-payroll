@@ -60,7 +60,7 @@ class AdminAddEmployeePage extends Component {
         }
     render() {
         return (
-            <div>
+            <div className= "container">
                 <h2>{this.state.heading}</h2>
                 <form onSubmit={this.addNewEmployee}>
                     <input type='text' placeholder='First Name' value={this.state.newEmployee.firstName}
