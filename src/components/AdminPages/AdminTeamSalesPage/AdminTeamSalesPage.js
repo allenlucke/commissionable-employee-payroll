@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import moment from 'moment';
 import currencyFormatter from 'currency-formatter';
 
 class AdminTeamSalesPage extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-
+import currencyFormatter from 'currency-formatter';
 
 class ManagerTeamSalesPage extends Component {
     state = {
@@ -43,8 +43,8 @@ class ManagerTeamSalesPage extends Component {
                     <td>{productId2QuantityList.length > 0 ? productId2QuantityList[0].productsSold : 0}</td>
                     <td>{productId3QuantityList.length > 0 ? productId3QuantityList[0].productsSold : 0}</td>
                     <td>{item.productsSold}</td>
-                    <td>{item.total_sales}</td>
-                    <td>{item.totalTeamCommissions}</td>
+                    <td>${item.total_sales}</td>
+                    <td>${currencyFormatter.format(item.totalTeamCommissions, 'USD')}</td>
                 </tr>
         )
         })
@@ -64,13 +64,13 @@ class ManagerTeamSalesPage extends Component {
                                 <td>{item.team_id}</td>
                                 <td>{item.teamName}</td>
                                 <td>{item.lastName}</td>
-                                <td>{item.avgTier}</td>
+                                <td>{currencyFormatter.format(item.avgTier, 'USD')}</td>
                                 <td>{productId1QuantityList.length > 0 ? productId1QuantityList[0].productsSold : 0}</td>
                                 <td>{productId2QuantityList.length > 0 ? productId2QuantityList[0].productsSold : 0}</td>
                                 <td>{productId3QuantityList.length > 0 ? productId3QuantityList[0].productsSold : 0}</td>
                                 <td>{item.productsSoldPerTeam}</td>
-                                <td>{item.salesPerTeam}</td>
-                                <td>{item.totalTeamCommissions}</td>
+                                <td>${item.salesPerTeam}</td>
+                                <td>${currencyFormatter.format(item.totalTeamCommissions, 'USD')}</td>
                             </tr>
                     )
         })
