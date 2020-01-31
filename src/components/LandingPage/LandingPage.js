@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
+import Button from '@material-ui/core/Button';
 import './LandingPage.css';
 
 class LandingPage extends Component {
@@ -23,12 +23,12 @@ class LandingPage extends Component {
                     </div>
                     <div className="grid-col grid-col_4">
                         
-                        <button
+                        <Button
                             className="btn btn_sizeFull"
                             onClick={this.onLogin}
-                        >
+                            variant="contained" color="primary">
                             Login
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

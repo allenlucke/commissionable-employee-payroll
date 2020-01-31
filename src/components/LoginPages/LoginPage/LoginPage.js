@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class LoginPage extends Component {
   state = {
@@ -48,33 +50,37 @@ class LoginPage extends Component {
           <h1>Login</h1>
           <div>
             <label htmlFor="username">
-              Username:
-              <input
+              
+              <TextField
                 type="text"
                 name="username"
+                placeholder='Username'
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
-              />
+                variant="filled" className="textField"
+              ></TextField>
             </label>
           </div>
           <div>
             <label htmlFor="password">
-              Password:
-              <input
+              
+              <TextField
                 type="password"
                 name="password"
+                placeholder='Password'
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-              />
+                variant="filled" className="textField"
+              ></TextField>
             </label>
           </div>
           <div>
-            <input
+            <Button
               className="log-in"
               type="submit"
               name="submit"
               value="Log In"
-            />
+              variant="contained" color="primary">Log-In</Button>
           </div>
         </form>
       </div>

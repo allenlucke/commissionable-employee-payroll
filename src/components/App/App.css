@@ -9,9 +9,9 @@ body {
 }
 
 form {
-    /* background-color: #dbd5d5; */
-    background-color: #659dbd;
-    width: 30%;
+    background-color: darkgray;
+    /* background-color: #659dbd; */
+    width: 33%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
@@ -65,8 +65,13 @@ h2, h3, p {
     color: black;
 }
 
-
+.textField{
+    background-color: whitesmoke;
+  }
 
 .container {
     padding: 4rem;
 }
+Button {
+    height: 3.5rem;
+  }
