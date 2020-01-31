@@ -71,7 +71,7 @@ class AdminAddEmployeePage extends Component {
                     onChange={(event) => this.handleInputChange(event, 'username')} />
                     <input type='text' placeholder='Password' value={this.state.newEmployee.password}
                     onChange={(event) => this.handleInputChange(event, 'password')} />
-                    <input type='text' placeholder='E-Mail' value={this.state.newEmployee.email}
+                    <input type='email' placeholder='E-Mail' value={this.state.newEmployee.email}
                     onChange={(event) => this.handleInputChange(event, 'email')} />
                     <input type='text' placeholder='Position' value={this.state.newEmployee.position}
                     onChange={(event) => this.handleInputChange(event, 'position')} />
