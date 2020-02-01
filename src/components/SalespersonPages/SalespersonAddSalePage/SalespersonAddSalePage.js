@@ -22,7 +22,7 @@ class SalespersonAddSalePage extends Component {
             }
         });
     }
-    addNewEmployee = (event, inputKey) => {
+    addSale = (event, inputKey) => {
         const saleToAdd = this.state.newSale;
         const userInfo = this.props.store.user;
         const userSecLvl = userInfo.securityLevel;
@@ -50,7 +50,7 @@ class SalespersonAddSalePage extends Component {
         return (
             <div className= "container">
                 <h2>{this.state.heading}</h2>
-                <form className="salesForm1" onSubmit={this.addNewEmployee}>
+                <form className="salesForm1" onSubmit={this.addSale}>
                     <Select style={{height: '5.8vh', width: '20%' }} onChange={(event) => this.handleInputChange(event, this.state.newSale.product_id = event.target.value )}
                       className="dropBox">
                         <MenuItem value='1'>Product1</MenuItem>

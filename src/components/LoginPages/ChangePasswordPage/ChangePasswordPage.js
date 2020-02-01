@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
+import { TextField, Button } from '@material-ui/core';
+import './../LoginPage/LoginPage.css'
 
 class ChangePasswordPage extends Component {
   state = {
@@ -43,49 +45,41 @@ class ChangePasswordPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.changePassword}>
-          <h1>Change Password</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
+        <form className="loginForm2" onSubmit={this.changePassword}>
+          <h2>Change Password</h2>
+              <TextField
                 type="text"
                 name="username"
+                placeholder='Username'
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
+                variant="outlined" className="textField"
+              ></TextField>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <TextField
                 type="password"
                 name="password"
+                placeholder="New Password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="confirmedPassword">
-              Password:
-              <input
+                variant="outlined" className="textField"
+              ></TextField>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <TextField
                 type="password"
                 name="confirmedPassword"
+                placeholder="Confirm New Password"
                 value={this.state.confirmedPassword}
                 onChange={this.handleInputChangeFor('confirmedPassword')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
+                variant="outlined" className="textField"
+              ></TextField>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            <Button
               className="register"
               type="submit"
               name="submit"
               value="Submit"
-            />
-          </div>
+              variant="contained" color="primary">Submit</Button>
         </form>
       </div>
     );

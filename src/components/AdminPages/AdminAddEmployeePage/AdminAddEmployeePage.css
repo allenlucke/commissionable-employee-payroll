@@ -1,0 +1,23 @@
+.addEmpForm1 {
+    background-color: #659dbd;
+    text-align: center;
+    width: 60%;
+    height: 12.5rem;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 2px;
+}
+
+.textFieldAddEmp{
+    background-color: whitesmoke;
+    /* text-align: auto; */
+    /* display: block; */
+    /* width: 20%; */
+    margin-left: 1.5%; 
+    margin-right: 1.5%;
+    margin-bottom: 1.5%;
+  }
+  label {
+    margin-bottom: 1.5%;
+    margin-top: 10%;
+  }

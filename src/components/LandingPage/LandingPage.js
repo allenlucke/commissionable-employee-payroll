@@ -22,7 +22,6 @@ class LandingPage extends Component {
                         <p>Welcome to our company. To arrive at your desired destination, please select one of the links in the navigation bar.</p>
                     </div>
                     <div className="grid-col grid-col_4">
-                        
                         <Button
                             className="btn btn_sizeFull"
                             onClick={this.onLogin}

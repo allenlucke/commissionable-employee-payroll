@@ -84,15 +84,6 @@ Button {
 Select, MenuItem {
     background-color: whitesmoke;
 }
-
-/* .FormControl {
-    text-align: center;
-    width: 33%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
-} */
 .salesForm1 {
     text-align: center;
     width: 50%;
