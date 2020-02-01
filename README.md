@@ -10,14 +10,6 @@ The App at present has three "Security Levels" of employees. Salesperson, Manage
 As this is designed to be an application for internal access to the application will only be granted to employees. New employees will automatically be sent their username and a starting password. Along with instructions to change their password upon initial login.
 
 *All passwords are encrypted*
-## Screenshots
-![](public/images/aminAddemp.png)
-![](public/images/aminAddRoster.png)
-![](public/images/aminTeamSal.png)
-![](public/images/mgrAllSal.png)
-![](public/images/mgrTeamSal.png)
-![](public/images/salesAdd.png)
-![](public/images/salesView.png)
 
 ## Prerequisites
 
@@ -68,20 +60,26 @@ Run the query in the `database.sql` file in Postico. A few notes about the Admin
 Admin level users have multiple links available to them and their options include the following:
 1. View all sales.
 2. View sales/commissions by team.
+![](public/images/adminTeamSal.png)
 3. View sales by employee
-4. View the employee Roster
-5. Add a new employee to the system.
+4. Add a new employee to the system.
+![](public/images/adminAddemp.png)
+5. View the employee Roster
+![](public/images/adminAddRoster.png)
 6. Terminate an employee. ( Provided they have no sales. future releases will utilize a legacy employee system to allow for termination of an employee w/o removing any vital employee or sales information.)
 
 Manager level users have multiple links available to them and their options include the following:
 1. View all sales made by members of their team.
+![](public/images/mgrAllSal.png)
 2. View the total team sales/commissions of their team.
+![](public/images/mgrTeamSal.png)
 3. View the cumulative sales/commissions of employees on their team.
 
 Salesperson level users have multiple links available to them and their options include the following:
 1. View a list of all sales/commissions they have made.
+![](public/images/salesView.png)
 2. Add a new sale.
-
+![](public/images/salesAdd.png)
 
 ## Built with
 Node, Express, Javascript, PostgreSQL, React, Redux, Nodemailer, html5, CSS3, Logger, Material UI A full list of dependencies can be found in `package.json`.
