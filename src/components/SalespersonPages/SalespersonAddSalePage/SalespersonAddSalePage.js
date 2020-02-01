@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import { MenuItem, Select, Button, TextField, InputLabel, FormControl } from '@material-ui/core';
-
+import { MenuItem, Select, Button, TextField } from '@material-ui/core';
 
 class SalespersonAddSalePage extends Component {
     state = {
@@ -32,6 +31,7 @@ class SalespersonAddSalePage extends Component {
             userSecLvl: userSecLvl,
             userID: userID
         }
+        
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_SALE',
@@ -44,7 +44,7 @@ class SalespersonAddSalePage extends Component {
                     transactionNumber: '',
                     date: '',
                 }
-            })
+            })   
         }
     render() {
         return (
