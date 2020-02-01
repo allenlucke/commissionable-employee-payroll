@@ -22,7 +22,7 @@ module.exports = async function(email, firstName, lastName, username, assignedPa
             and password to log into your account.</p>
             <h1>Username: ${username}<h1>
             <h1>Password: ${assignedPassword}<h1>
-            <a href="http://localhost:3000/#/login">Log In</a>
+            <a href=${process.env.LINK_TO_LOGIN}>Log In</a>
             <p>Please log in and change your password by clicking on the
             change password link in the navigation bar.</p>
         ` // html body
