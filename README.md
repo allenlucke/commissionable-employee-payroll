@@ -52,22 +52,24 @@ Run the query in the `database.sql` file in Postico. A few notes about the Admin
 2. Many of the values can be changed based on your preferences(Example: firstName, lastName, username, email).
 3. If you want this account to be a hidden Dev account, one that will not show up on the Admin Roster Page, change the `base_salary` to 0. Such an account can only be deleted directly on the database.
 
-## Usage ##
 ## Login
 1. Login by using your username and password on the login screen.
 2. A user may change their password by visiting the change password link. It is advised that all new users immediately change their initially provided password to one of their own making.
 
+## Admin
 Admin level users have multiple links available to them and their options include the following:
 1. View all sales.
+![](public/images/adminAll.png)
 2. View sales/commissions by team.
-![](public/images/adminTeamSal.png)
 3. View sales by employee
+![](public/images/adminTeamSal.png)
 4. Add a new employee to the system.
 ![](public/images/adminAddemp.png)
 5. View the employee Roster
-![](public/images/adminAddRoster.png)
+![](public/images/adminRoster.png)
 6. Terminate an employee. ( Provided they have no sales. future releases will utilize a legacy employee system to allow for termination of an employee w/o removing any vital employee or sales information.)
 
+## Manager
 Manager level users have multiple links available to them and their options include the following:
 1. View all sales made by members of their team.
 ![](public/images/mgrAllSal.png)
@@ -75,6 +77,7 @@ Manager level users have multiple links available to them and their options incl
 ![](public/images/mgrTeamSal.png)
 3. View the cumulative sales/commissions of employees on their team.
 
+## Salesperson
 Salesperson level users have multiple links available to them and their options include the following:
 1. View a list of all sales/commissions they have made.
 ![](public/images/salesView.png)
