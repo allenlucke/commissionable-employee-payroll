@@ -19,7 +19,7 @@ class LandingPage extends Component {
                 <h2>{this.state.heading}</h2>
                 <div className="grid">
                     <div className="grid-col grid-col_8">
-                        <p>To arrive at your desired destination, please select one of the links in the navigation bar.</p>
+                        <p>Welcome to our company. To arrive at your desired destination, please select one of the links in the navigation bar.</p>
                     </div>
                     <div className="grid-col grid-col_4">
                         

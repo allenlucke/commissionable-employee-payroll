@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer  className= "container">
-    &copy; Allen M. Lucke
+    {/* &copy; Allen M. Lucke */}
   </footer>
 );
 

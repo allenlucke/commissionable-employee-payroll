@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import moment from 'moment';
+import Button from '@material-ui/core/Button';
 
 class AdminRosterPage extends Component {
     state = {
@@ -50,8 +51,8 @@ class AdminRosterPage extends Component {
                         <td>{item.bonusTier}</td>
                         <td>{item.team_id}</td>
                         <td>{item.teamName}</td>                
-                        <td><button onClick={(event) =>this.deleteEmployee(event, item.id)}>
-                        Terminate</button></td>
+                        <td><Button onClick={(event) =>this.deleteEmployee(event, item.id)}
+                            variant="contained" color="secondary">Terminate</Button></td>
                     </tr>
                 </tbody>
             )

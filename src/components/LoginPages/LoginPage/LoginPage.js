@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import './LoginPage.css'
 class LoginPage extends Component {
   state = {
     username: '',
@@ -37,7 +37,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div  className= "container">
+      <div className= "container">
         {this.props.store.errors.loginMessage && (
           <h2
             className="alert"
@@ -46,42 +46,32 @@ class LoginPage extends Component {
             {this.props.store.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form className="loginForm1" onSubmit={this.login}>
           <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              
               <TextField
                 type="text"
                 name="username"
                 placeholder='Username'
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
-                variant="filled" className="textField"
+                variant="outlined" className="textField"
               ></TextField>
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
                 type="password"
                 name="password"
                 placeholder='Password'
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-                variant="filled" className="textField"
+                variant="outlined" className="textField"
               ></TextField>
-            </label>
-          </div>
-          <div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
             <Button
               className="log-in"
               type="submit"
               name="submit"
               value="Log In"
               variant="contained" color="primary">Log-In</Button>
-          </div>
         </form>
       </div>
     );

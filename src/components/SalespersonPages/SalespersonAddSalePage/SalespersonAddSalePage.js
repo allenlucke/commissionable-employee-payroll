@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
+import { MenuItem, Select, Button, TextField, InputLabel, FormControl } from '@material-ui/core';
 
 
 class SalespersonAddSalePage extends Component {
@@ -49,19 +50,28 @@ class SalespersonAddSalePage extends Component {
         return (
             <div className= "container">
                 <h2>{this.state.heading}</h2>
-                <form onSubmit={this.addNewEmployee}>
-                    <select onChange={(event) => this.handleInputChange(event, this.state.newSale.product_id = event.target.value )}>
-                        <option value='1'>Product1</option>
-                        <option value='2'>Product2</option>
-                        <option value='3'>Product3</option>
-                    </select>
-                    <input type='number' placeholder='Quantity' value={this.state.newSale.unitsSold}
-                    onChange={(event) => this.handleInputChange(event, 'unitsSold')} />
-                    <input type='text' placeholder='Transaction Number' value={this.state.newSale.transactionNumber}
-                    onChange={(event) => this.handleInputChange(event, 'transactionNumber')} />
-                    <input type='text' placeholder='Date' value={this.state.newSale.date}
-                    onChange={(event) => this.handleInputChange(event, 'date')} />
-                    <input type='submit' value='Submit' />
+                <form className="salesForm1" onSubmit={this.addNewEmployee}>
+                    <Select style={{height: '5.8vh', width: '20%' }} onChange={(event) => this.handleInputChange(event, this.state.newSale.product_id = event.target.value )}
+                      className="dropBox">
+                        <MenuItem value='1'>Product1</MenuItem>
+                        <MenuItem value='2'>Product2</MenuItem>
+                        <MenuItem value='3'>Product3</MenuItem> 
+                    </Select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <TextField type='number' placeholder='Quantity' value={this.state.newSale.unitsSold}
+                    onChange={(event) => this.handleInputChange(event, 'unitsSold')}
+                    variant="outlined" className="textField"></TextField>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <TextField type='text' placeholder='Transaction Number' value={this.state.newSale.transactionNumber}
+                    onChange={(event) => this.handleInputChange(event, 'transactionNumber')}
+                    variant="outlined" className="textField"></TextField>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <TextField type='date' placeholder='Date' value={this.state.newSale.date}
+                    onChange={(event) => this.handleInputChange(event, 'date')}
+                    variant="outlined" className="textField"></TextField>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button type='submit' value='Submit' 
+                    variant="contained" color="primary">Submit</Button>
                 </form>
             </div>
         );
