@@ -10,6 +10,14 @@ The App at present has three "Security Levels" of employees. Salesperson, Manage
 As this is designed to be an application for internal access to the application will only be granted to employees. New employees will automatically be sent their username and a starting password. Along with instructions to change their password upon initial login.
 
 *All passwords are encrypted*
+## Screenshots
+![](public/images/aminAddemp.png)
+![](public/images/aminAddRoster.png)
+![](public/images/aminTeamSal.png)
+![](public/images/mgrAllSal.png)
+![](public/images/mgrTeamSal.png)
+![](public/images/salesAdd.png)
+![](public/images/salesView.png)
 
 ## Prerequisites
 
@@ -40,23 +48,17 @@ Replace `yourEmail` with your email address and `yourPassword` with your email p
 Visit https://myaccount.google.com/lesssecureapps and click Allow less secure apps: ON.
 This will allow the nodemailer feature access to your email so you can send username and passwords to your new employees.
 
-## Create database and table
+## Create Database and Tables
 
-Create a new database called `commission_app` and run the queries from the `database.sql` file.
+Create a new database called `commission_app` and run the queries from the `database.init.sql` file in Postico.
 
 If you would like to name your database something else, you will need to change `commission_app` to the name of your new database name in `server/modules/pool.js`
 
-## Creating Admin User
-This process can be a little tricky. However doing so will allow you to create Admin access to the app which you will need to utilize the app and grant access to your employees as well.
-
-1. Go to the adminAddEmployeePage.router at `server/routes/admin.router/adminAddEmployeePage.router`. And comment out the code in the screenshot. Doing so will allow you to bypass the initial security checks to create your Admin account.
-![](public/images/addEmp1.png)
-
-2. Go to Postman and run the route in the screenshot. Name the user etc. whatever you like, but be sure to use your own email address and set the securityLevel to 10 or above.
-![](public/images/addEmp2.png)
-3. Don't forget to uncomment the code you commented out in step 1.
-![](public/images/addEmp3.png)
-
+## Creating Initial Admin Account
+Run the query in the `database.sql` file in Postico. A few notes about the Admin account:
+1. An encrypted password has been supplied for initial login. The unencrypted password is `HotTuna`.
+2. Many of the values can be changed based on your preferences(Example: firstName, lastName, username, email).
+3. If you want this account to be a hidden Dev account, one that will not show up on the Admin Roster Page, change the `base_salary` to 0. Such an account can only be deleted directly on the database.
 
 ## Usage ##
 ## Login
@@ -82,10 +84,10 @@ Salesperson level users have multiple links available to them and their options 
 
 
 ## Built with
-Node, Express, Javascript, PostgreSQL, React, Redux, Nodemailer, html, CSS, Logger, Body-Parser A full list of dependencies can be found in `package.json`.
+Node, Express, Javascript, PostgreSQL, React, Redux, Nodemailer, html5, CSS3, Logger, Material UI A full list of dependencies can be found in `package.json`.
 
 ## Acknowledgement
-Thanks to Prime Digital Academy in Kansas City who equipped and helped me to make this application a reality. Specifically Scott, Myron, and the Tyto cohort.
+Thanks to Prime Digital Academy in Kansas City who equipped and helped me to make this application a reality. Specifically Scott, Myron, Rachael, and the Tyto cohort.
 
 ## Support
 If you have suggestions or issues, please email me at allenlucke@gmail.com
