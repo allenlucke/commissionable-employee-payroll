@@ -50,21 +50,23 @@ class LoginPage extends Component {
         <form className="loginForm1" onSubmit={this.login}>
           <h1>Login</h1>
               <TextField
+                style={{height: '5.8vh', width: '22%' }}
                 type="text"
                 name="username"
                 placeholder='Username'
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
-                variant="outlined" className="textField"
+                variant="outlined" className="textField2"
               ></TextField>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
+                style={{height: '5.8vh', width: '22%' }}
                 type="password"
                 name="password"
                 placeholder='Password'
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-                variant="outlined" className="textField"
+                variant="outlined" className="textField2"
               ></TextField>
               &nbsp;&nbsp;&nbsp;&nbsp;
             <Button

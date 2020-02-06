@@ -16,3 +16,12 @@
     padding: 25px;
     border-radius: 2px;
 }
+
+.textField2 {
+    background-color: whitesmoke;
+    text-align: auto;
+    display: inline-block;
+    width: 20%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+}

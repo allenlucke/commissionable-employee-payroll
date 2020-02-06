@@ -79,7 +79,7 @@ class AdminAddEmployeePage extends Component {
                     variant="outlined" className="textFieldAddEmp"></TextField>&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField type='email' placeholder='E-Mail' value={this.state.newEmployee.email}
                     onChange={(event) => this.handleInputChange(event, 'email')}
-                    variant="outlined" className="textFieldAddEmp"></TextField>
+                    variant="outlined" className="textFieldAddEmp"></TextField>&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField type='text' placeholder='Position' value={this.state.newEmployee.position}
                     onChange={(event) => this.handleInputChange(event, 'position')}
                     variant="outlined" className="textFieldAddEmp"></TextField>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -94,7 +94,7 @@ class AdminAddEmployeePage extends Component {
                     variant="outlined" className="textFieldAddEmp"></TextField>&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField type='number' placeholder='Team ID' value={this.state.newEmployee.team_id}
                     onChange={(event) => this.handleInputChange(event, 'team_id')}
-                    variant="outlined" className="textFieldAddEmp"></TextField>
+                    variant="outlined" className="textFieldAddEmp"></TextField>&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button type='submit' value='Add New Employee'
                     variant="contained" color="primary">Add New Employee</Button>
                 </form>

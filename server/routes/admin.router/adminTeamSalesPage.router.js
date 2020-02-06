@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./../../modules/pool');
 const { rejectUnauthenticated } = require('./../../modules/authentication-middleware');
-// let newItem;
 
 // Get Total Team Sales -- Admin Team Sales Page
 router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
@@ -68,9 +67,6 @@ router.get('/:userSecLvl/:userID', rejectUnauthenticated, (req, res) => {
                             };
                             return teamData;
                         });
-
-                        console.log('\n---------------\n', newTeamsDataArray);
-                        
                         res.send(newTeamsDataArray);
                     })   
                     .catch((err) => {
@@ -134,8 +130,6 @@ router.get('/empSales/:userSecLvl/:userID', rejectUnauthenticated, (req, res) =>
                 };
                 return empData;
             });
-            console.log('n---------------------n', newEmpDataArray);
-
             res.send(newEmpDataArray)
         })    
         .catch((err) => {
